@@ -1,6 +1,6 @@
-# Academic Website — Abdoul Kadiri Ibrahim Goni
+# Academic Website — Ibrahim Goni Abdoulkadiri
 
-Personal academic website of Abdoul Kadiri Ibrahim Goni, Ph.D. candidate in
+Personal academic website of Ibrahim Goni Abdoulkadiri, Ph.D. candidate in
 development economics at CERDI (Université Clermont Auvergne, CNRS, IRD).
 
 Live site: https://ibgoni.github.io/ibrahimgoni.github.io/
