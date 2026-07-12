@@ -3,7 +3,7 @@
 Personal academic website of Ibrahim Goni Abdoulkadiri, Ph.D. candidate in
 development economics at CERDI (Université Clermont Auvergne, CNRS, IRD).
 
-Live site: https://ibgoni.github.io/
+Live site: https://ibrahimgoni.com/
 
 ## Structure
 
