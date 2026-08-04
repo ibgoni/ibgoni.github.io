@@ -1,0 +1,469 @@
+/* ==========================================================================
+   Notebook pages — styling for the HTML that nbconvert's `basic` template
+   emits (.cell / .input_area / .output_area / .highlight / .dataframe).
+   Loaded only on /notebooks/<slug>.html.
+
+   Syntax colours are hand-picked to sit inside the site's navy-and-gold
+   palette rather than importing a stock Pygments theme.
+   ========================================================================== */
+
+/* --------------------------------------------------------------- layout */
+
+.nb-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.nb-main { min-width: 0; }
+
+.nb-head { margin-bottom: 2rem; }
+
+.crumb {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.7rem;
+}
+
+.crumb a { color: var(--gold-text); }
+
+.nb-summary {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0.9rem 0 0.9rem;
+  max-width: 40rem;
+}
+
+.nb-meta {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  color: var(--faint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.nb-meta .sep { color: var(--rule-strong); }
+.nb-meta a { color: var(--navy); }
+
+.nb-toc {
+  position: sticky;
+  top: 5.5rem;
+  font-family: var(--sans);
+  border-left: 2px solid var(--rule);
+  padding-left: 1.1rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.toc-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.7rem;
+}
+
+.nb-toc ul { list-style: none; }
+
+.nb-toc li { margin-bottom: 0.45rem; line-height: 1.4; }
+
+.nb-toc a {
+  font-size: 0.8438rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nb-toc a:hover { color: var(--navy); }
+
+.nb-toc a.active { color: var(--navy); font-weight: 600; }
+
+.nb-toc .toc-l3 { padding-left: 0.85rem; }
+
+/* ---------------------------------------------------------------- cells */
+
+.notebook { font-size: 1.0625rem; line-height: 1.75; }
+
+.notebook .cell { margin-bottom: 1.35rem; }
+
+.notebook .cell:last-child { margin-bottom: 0; }
+
+/* nbconvert wraps markdown output in these */
+.notebook .text_cell_render > *:last-child { margin-bottom: 0; }
+
+.notebook h1,
+.notebook h2,
+.notebook h3,
+.notebook h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  display: block;
+  text-transform: none;
+}
+
+.notebook h2 {
+  font-size: 1.5rem;
+  margin: 2.75rem 0 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.notebook h2::before,
+.notebook h2::after { content: none; }
+
+.notebook h3 { font-size: 1.1875rem; margin: 2rem 0 0.7rem; }
+.notebook h4 { font-size: 1.0625rem; margin: 1.5rem 0 0.5rem; }
+
+.notebook p { margin: 0 0 1rem; color: var(--body); }
+
+.notebook ul,
+.notebook ol { margin: 0 0 1rem 1.35rem; color: var(--body); }
+
+.notebook li { margin-bottom: 0.4rem; }
+
+.notebook li > p { margin-bottom: 0.4rem; }
+
+.notebook strong { color: var(--ink); font-weight: 600; }
+
+.notebook blockquote {
+  margin: 0 0 1.35rem;
+  padding: 1rem 1.25rem;
+  background: var(--wash);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--body);
+  font-size: 1rem;
+}
+
+.notebook blockquote p:last-child { margin-bottom: 0; }
+
+.notebook em { font-style: italic; }
+
+.notebook hr { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+/* the ¶ nbconvert appends to headings */
+.notebook .anchor-link {
+  color: var(--rule-strong);
+  text-decoration: none;
+  margin-left: 0.4rem;
+  opacity: 0;
+  font-weight: 400;
+  transition: opacity 0.15s ease;
+}
+
+.notebook h2:hover .anchor-link,
+.notebook h3:hover .anchor-link,
+.notebook h4:hover .anchor-link { opacity: 1; }
+
+.notebook .anchor-link:hover { color: var(--gold-text); }
+
+/* inline code in markdown cells */
+.notebook .rendered_html code {
+  font-family: var(--mono);
+  font-size: 0.875em;
+  color: var(--navy);
+  background: var(--wash);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+}
+
+/* ----------------------------------------------------------- code input */
+
+.notebook .input_area {
+  position: relative;
+  background: var(--wash);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  overflow: hidden;
+}
+
+.notebook .input_area pre {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8438rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: transparent;
+  tab-size: 4;
+}
+
+.notebook .highlight { background: transparent; }
+
+/* ---------------------------------------------------------------- output */
+
+.notebook .output_wrapper { margin-top: 0.45rem; }
+
+.notebook .output_area {
+  display: block;
+  padding: 0;
+}
+
+.notebook .output_subarea { max-width: 100%; overflow-x: auto; }
+
+/* stdout / plain repr */
+.notebook .output_text pre {
+  margin: 0;
+  padding: 0.85rem 1.15rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--body);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.notebook .output_error pre {
+  color: #a5341f;
+  border-left-color: #c0563c;
+  background: color-mix(in srgb, #c0563c 7%, var(--card));
+}
+
+html[data-theme="dark"] .notebook .output_error pre { color: #f0a08c; }
+
+/* figures: matplotlib renders on white, so keep a white plate in dark mode */
+.notebook .output_png,
+.notebook .output_jpeg,
+.notebook .output_svg {
+  padding: 0.6rem;
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.notebook .output_png img,
+.notebook .output_jpeg img,
+.notebook .output_svg svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------------------ dataframes */
+
+.notebook .output_html { overflow-x: auto; }
+
+.notebook table,
+.notebook table.dataframe {
+  border-collapse: collapse;
+  width: auto;
+  min-width: 50%;
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  background: var(--card);
+}
+
+.notebook table.dataframe { border: 1px solid var(--rule); }
+
+.notebook table th,
+.notebook table td {
+  padding: 0.45rem 0.85rem;
+  text-align: right;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.notebook table thead th {
+  background: var(--wash);
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 2px solid var(--rule-strong);
+}
+
+.notebook table tbody th {
+  color: var(--faint);
+  font-weight: 600;
+  text-align: left;
+  background: color-mix(in srgb, var(--wash) 55%, transparent);
+}
+
+.notebook table td { color: var(--body); font-variant-numeric: tabular-nums; }
+
+.notebook table tbody tr:last-child th,
+.notebook table tbody tr:last-child td { border-bottom: none; }
+
+/* ---------------------------------------------------------- MathJax bits */
+
+.notebook mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem 0;
+  margin: 1.2rem 0 !important;
+}
+
+/* ------------------------------------------------------ syntax highlight */
+
+.notebook .highlight .c,
+.notebook .highlight .c1,
+.notebook .highlight .cm,
+.notebook .highlight .cs,
+.notebook .highlight .ch,
+.notebook .highlight .cp,
+.notebook .highlight .cpf { color: var(--gold-text); font-style: italic; }
+
+.notebook .highlight .k,
+.notebook .highlight .kc,
+.notebook .highlight .kd,
+.notebook .highlight .kn,
+.notebook .highlight .kp,
+.notebook .highlight .kr,
+.notebook .highlight .kt { color: #1c4f8b; font-weight: 600; }
+
+.notebook .highlight .o,
+.notebook .highlight .ow { color: #a1541b; }
+
+.notebook .highlight .s,
+.notebook .highlight .s1,
+.notebook .highlight .s2,
+.notebook .highlight .sa,
+.notebook .highlight .sb,
+.notebook .highlight .sc,
+.notebook .highlight .sd,
+.notebook .highlight .se,
+.notebook .highlight .sh,
+.notebook .highlight .si,
+.notebook .highlight .sx,
+.notebook .highlight .sr,
+.notebook .highlight .ss { color: #1f6b4a; }
+
+.notebook .highlight .m,
+.notebook .highlight .mb,
+.notebook .highlight .mf,
+.notebook .highlight .mh,
+.notebook .highlight .mi,
+.notebook .highlight .mo,
+.notebook .highlight .il { color: #8a3fa0; }
+
+.notebook .highlight .nb,
+.notebook .highlight .bp { color: #0d5aa3; }
+
+.notebook .highlight .nf,
+.notebook .highlight .fm { color: #24467c; font-weight: 600; }
+
+.notebook .highlight .nc,
+.notebook .highlight .nn { color: #24467c; }
+
+.notebook .highlight .nd { color: #a1541b; }
+.notebook .highlight .nv, .notebook .highlight .vi { color: var(--ink); }
+.notebook .highlight .p, .notebook .highlight .w { color: var(--muted); }
+.notebook .highlight .err { color: #a5341f; }
+
+html[data-theme="dark"] .notebook .highlight .c,
+html[data-theme="dark"] .notebook .highlight .c1,
+html[data-theme="dark"] .notebook .highlight .cm,
+html[data-theme="dark"] .notebook .highlight .cs,
+html[data-theme="dark"] .notebook .highlight .ch,
+html[data-theme="dark"] .notebook .highlight .cp,
+html[data-theme="dark"] .notebook .highlight .cpf { color: #c49a5a; }
+
+html[data-theme="dark"] .notebook .highlight .k,
+html[data-theme="dark"] .notebook .highlight .kc,
+html[data-theme="dark"] .notebook .highlight .kd,
+html[data-theme="dark"] .notebook .highlight .kn,
+html[data-theme="dark"] .notebook .highlight .kp,
+html[data-theme="dark"] .notebook .highlight .kr,
+html[data-theme="dark"] .notebook .highlight .kt { color: #82b6ea; }
+
+html[data-theme="dark"] .notebook .highlight .o,
+html[data-theme="dark"] .notebook .highlight .ow,
+html[data-theme="dark"] .notebook .highlight .nd { color: #e0a06a; }
+
+html[data-theme="dark"] .notebook .highlight .s,
+html[data-theme="dark"] .notebook .highlight .s1,
+html[data-theme="dark"] .notebook .highlight .s2,
+html[data-theme="dark"] .notebook .highlight .sa,
+html[data-theme="dark"] .notebook .highlight .sb,
+html[data-theme="dark"] .notebook .highlight .sc,
+html[data-theme="dark"] .notebook .highlight .sd,
+html[data-theme="dark"] .notebook .highlight .se,
+html[data-theme="dark"] .notebook .highlight .sh,
+html[data-theme="dark"] .notebook .highlight .si,
+html[data-theme="dark"] .notebook .highlight .sx,
+html[data-theme="dark"] .notebook .highlight .sr,
+html[data-theme="dark"] .notebook .highlight .ss { color: #86ceab; }
+
+html[data-theme="dark"] .notebook .highlight .m,
+html[data-theme="dark"] .notebook .highlight .mb,
+html[data-theme="dark"] .notebook .highlight .mf,
+html[data-theme="dark"] .notebook .highlight .mh,
+html[data-theme="dark"] .notebook .highlight .mi,
+html[data-theme="dark"] .notebook .highlight .mo,
+html[data-theme="dark"] .notebook .highlight .il { color: #d6a4e6; }
+
+html[data-theme="dark"] .notebook .highlight .nb,
+html[data-theme="dark"] .notebook .highlight .bp { color: #9fc9f0; }
+
+html[data-theme="dark"] .notebook .highlight .nf,
+html[data-theme="dark"] .notebook .highlight .fm,
+html[data-theme="dark"] .notebook .highlight .nc,
+html[data-theme="dark"] .notebook .highlight .nn { color: #a8c8ee; }
+
+html[data-theme="dark"] .notebook .highlight .err { color: #f0a08c; }
+
+/* ANSI colours in tracebacks */
+.notebook .ansi-red-fg { color: #a5341f; }
+.notebook .ansi-green-fg { color: #1f6b4a; }
+.notebook .ansi-cyan-fg { color: #1c4f8b; }
+.notebook .ansi-blue-fg { color: #1c4f8b; }
+.notebook .ansi-yellow-fg { color: var(--gold-text); }
+
+html[data-theme="dark"] .notebook .ansi-red-fg { color: #f0a08c; }
+html[data-theme="dark"] .notebook .ansi-green-fg { color: #86ceab; }
+html[data-theme="dark"] .notebook .ansi-cyan-fg,
+html[data-theme="dark"] .notebook .ansi-blue-fg { color: #82b6ea; }
+
+/* ----------------------------------------------------------------- small */
+
+@media (max-width: 980px) {
+  .nb-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+
+  .nb-toc {
+    position: static;
+    order: -1;
+    max-height: none;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding: 1.1rem 0 0;
+    margin-top: 2rem;
+  }
+
+  .nb-toc ul { columns: 2; column-gap: 2rem; }
+}
+
+@media (max-width: 700px) {
+  .notebook { font-size: 1rem; }
+  .notebook .input_area pre { font-size: 0.78125rem; padding: 0.85rem 0.9rem; }
+  .notebook .output_text pre { font-size: 0.75rem; padding: 0.7rem 0.9rem; }
+  .nb-toc ul { columns: 1; }
+}
+
+@media print {
+  .nb-layout { display: block; }
+  .notebook .input_area,
+  .notebook .output_text pre { background: #fff; border-color: #ccc; }
+}

@@ -1,0 +1,72 @@
+name: Publish notebooks
+
+# Turns notebooks/*.ipynb into notebooks/*.html and rebuilds notebooks.html.
+#
+# On a pull request it only checks that the committed HTML matches the
+# notebooks. On a push to main it rebuilds and commits the result, so you can
+# add a notebook from the GitHub web interface and the page appears by itself.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'notebooks/**.ipynb'
+      - 'tools/build_notebooks.py'
+      - 'tools/templates/**'
+      - '.github/workflows/notebooks.yml'
+  pull_request:
+    paths:
+      - 'notebooks/**.ipynb'
+      - 'tools/build_notebooks.py'
+      - 'tools/templates/**'
+  workflow_dispatch:
+
+# Never let two rebuilds race for the same branch.
+concurrency:
+  group: notebooks-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet nbformat nbconvert
+      - name: Verify the generated pages are up to date
+        run: python tools/build_notebooks.py --check
+
+  publish:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install --quiet nbformat nbconvert
+
+      - name: Build the notebook pages
+        run: python tools/build_notebooks.py
+
+      - name: Commit the result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A notebooks notebooks.html
+          if git diff --cached --quiet; then
+            echo "Nothing to commit — pages already up to date."
+            exit 0
+          fi
+          # [skip ci] plus the paths filter above keeps this from looping.
+          git commit -m "Rebuild notebook pages [skip ci]"
+          git push
