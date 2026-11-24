@@ -7,8 +7,8 @@ Live site: https://ibgoni.github.io/
 
 ## Structure
 
-- `index.html` — home page (bio, photo, contact)
-- `research.html` — working papers and work in progress, with expandable abstracts
+- `index.html` — home page (bio, photo, news, contact)
+- `research.html` — working papers, work in progress and presentations
 - `teaching.html` — teaching hub, generated from `_data/teaching.yml`
 - `teaching/<course>/` — course pages; `teaching/<course>/<session>/` — session pages
 - `assets/cv/Ibrahim_Goni_CV.pdf` — downloadable CV
@@ -17,17 +17,27 @@ Live site: https://ibgoni.github.io/
 
 Deployed with GitHub Pages, which builds the site with Jekyll: every
 change merged into `main` is live about a minute later (allow up to
-10 minutes for the HTTP cache). `index.html` and `research.html` are plain
-HTML; the teaching pages use the layouts in `_layouts/` and `_includes/`.
+10 minutes for the HTTP cache). Every page shares the layout in
+`_layouts/base.html` (head, header with the theme toggle, footer) and the
+components in `_includes/`.
 
 ## How to update
 
-- **Text or a new paper**: edit the relevant HTML file (e.g.
-  `research.html`) directly on GitHub (pencil icon). To add a paper,
-  copy an existing `<article class="paper">…</article>` block and edit
-  the text inside the tags.
-- **CV**: edit `assets/cv/cv-source.html`, open it in Chrome, print to
-  PDF (A4, default margins, no browser headers/footers) and replace
+- **News** (home page): add an item at the top of `_data/news.yml`
+  (date, kind, one sentence). The six latest items are shown; older ones
+  fold into "Earlier news". Future-dated items get an "Upcoming" badge
+  automatically.
+- **Presentations**: add an entry to `_data/talks.yml`. It appears on the
+  Research page (by year) and, through `paper:`, under the paper presented.
+- **Text or a new paper**: edit `research.html` directly on GitHub
+  (pencil icon). To add a paper, copy an existing
+  `<article class="paper">…</article>` block and edit the text inside the
+  tags.
+- **Light/dark theme**: visitors switch with the button in the header;
+  the choice is remembered, otherwise the system setting is used.
+- **CV**: edit `assets/cv/cv-source.html` (Harvard-style layout, EB Garamond
+  in `assets/cv/fonts/`), open it in Chrome, print to PDF (A4, default
+  margins, no browser headers/footers, background graphics on) and replace
   `assets/cv/Ibrahim_Goni_CV.pdf`. Full instructions are in a comment
   at the top of the source file.
 - **Photo**: replace `assets/img/portrait.jpg` (keep the same filename).

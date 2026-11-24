@@ -1,127 +1,120 @@
 <!DOCTYPE html>
 <!--
   SOURCE OF THE CV PDF (assets/cv/Ibrahim_Goni_CV.pdf)
+  Layout follows the Harvard academic CV conventions: one serif face
+  (EB Garamond, in fonts/), reverse-chronological sections, institution and
+  place on the first line, degree or role and dates on the second.
 
-  How to regenerate the PDF after editing this file:
+  To regenerate the PDF after editing this file:
   1. Open this file in Chrome or Edge (double-click it).
-  2. Press Ctrl+P (Cmd+P on Mac).
-  3. Destination: "Save as PDF" - Paper size: A4 - Margins: Default
-     - UNTICK "Headers and footers".
-  4. Save as Ibrahim_Goni_CV.pdf and replace the file in assets/cv/.
-
-  (Page numbers at the bottom are generated automatically by the
-  @page rules below - do not add them by hand.)
+  2. Ctrl+P (Cmd+P on Mac) - Destination "Save as PDF" - Paper size A4 -
+     Margins "Default" - UNTICK "Headers and footers" - tick "Background graphics".
+  3. Save as Ibrahim_Goni_CV.pdf in assets/cv/.
+  Page numbers are produced by the @page rules below.
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Ibrahim Goni Abdoulkadiri — Curriculum Vitae</title>
 <style>
+  @font-face { font-family: "EB Garamond"; src: url("fonts/eb-garamond-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "EB Garamond"; src: url("fonts/eb-garamond-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "EB Garamond"; src: url("fonts/eb-garamond-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "EB Garamond"; src: url("fonts/eb-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+  @font-face { font-family: "EB Garamond"; src: url("fonts/eb-garamond-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+
   @page {
     size: A4;
-    margin: 18mm 20mm 20mm;
-
+    margin: 14mm 17mm 15mm;
     @bottom-left {
-      content: "Ibrahim Goni Abdoulkadiri — Curriculum Vitae";
-      font-family: "Bitstream Charter", "Charter", "Liberation Serif", serif;
-      font-size: 7.5pt;
-      color: #8a8a8a;
+      content: "Ibrahim Goni Abdoulkadiri · Curriculum Vitae · November 2026";
+      font-family: "EB Garamond", Garamond, serif;
+      font-size: 8.5pt;
+      color: #7a7a7a;
     }
     @bottom-right {
-      content: "Page " counter(page) " of " counter(pages);
-      font-family: "Bitstream Charter", "Charter", "Liberation Serif", serif;
-      font-size: 7.5pt;
-      color: #8a8a8a;
+      content: counter(page) " / " counter(pages);
+      font-family: "EB Garamond", Garamond, serif;
+      font-size: 8.5pt;
+      color: #7a7a7a;
     }
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
   body {
-    font-family: "Bitstream Charter", "Charter", "Liberation Serif", serif;
-    font-size: 10pt;
-    line-height: 1.42;
-    color: #14171a;
+    font-family: "EB Garamond", Garamond, "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.24;
+    color: #111;
+    font-variant-numeric: lining-nums;
+    font-kerning: normal;
   }
 
-  a { color: #003262; text-decoration: none; }
+  @media screen {
+    body { max-width: 210mm; margin: 24px auto; padding: 15mm 17mm; background: #fff; box-shadow: 0 0 0 1px #ddd; }
+    html { background: #f3f3f3; }
+  }
+
+  a { color: inherit; text-decoration: none; }
 
   /* ------------------------------------------------------------- header */
-  header { text-align: center; margin-bottom: 14pt; }
+  header { text-align: center; margin-bottom: 9pt; }
+  .name { font-size: 20pt; font-weight: 600; letter-spacing: 0.04em; font-variant: small-caps; line-height: 1.1; }
+  .subtitle { font-size: 11.5pt; font-style: italic; margin-top: 1pt; }
+  .contact { font-size: 10pt; margin-top: 4pt; line-height: 1.35; }
+  .contact .sep { margin: 0 5pt; color: #888; }
 
-  .name {
-    font-size: 16.5pt;
-    font-weight: bold;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: #003262;
-    margin-bottom: 2pt;
-  }
-
-  .subtitle {
-    font-size: 10.5pt;
-    font-style: italic;
-    color: #333;
-    margin-bottom: 5pt;
-  }
-
-  .contact { font-size: 9pt; color: #333; line-height: 1.5; }
-
-  /* ------------------------------------------------------------ headings */
+  /* ----------------------------------------------------------- sections */
   h2 {
-    font-size: 9.5pt;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #003262;
-    border-bottom: 0.75pt solid #b9c4d0;
-    padding-bottom: 2pt;
-    margin: 12pt 0 6pt;
+    font-size: 11.5pt;
+    font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 0.07em;
+    border-bottom: 0.6pt solid #111;
+    padding-bottom: 1pt;
+    margin: 9pt 0 3.5pt;
     break-after: avoid;
   }
 
-  /* -------------------------------------------------------------- entries */
-  .entry { margin-bottom: 6pt; break-inside: avoid; }
+  .entry { margin-bottom: 4pt; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 14pt; }
+  .row .l { flex: 1; }
+  .row .r { white-space: nowrap; text-align: right; }
+  .org { font-weight: 700; }
+  .role { font-style: italic; }
+  .detail { margin-top: 1pt; }
+  .honors { font-size: 10pt; }
 
-  .entry-head { display: flex; align-items: baseline; gap: 12pt; }
-  .entry-head .what { flex: 1; }
-  .entry-head .date {
-    white-space: nowrap;
-    font-size: 9pt;
-    font-weight: bold;
-    color: #003262;
-  }
+  ul.bul { list-style: none; margin-top: 1.5pt; }
+  ul.bul li { position: relative; padding-left: 11pt; margin-bottom: 1pt; font-size: 10pt; }
+  ul.bul li::before { content: "•"; position: absolute; left: 2pt; top: 0; }
 
-  .entry .detail { font-size: 9.5pt; color: #333; margin-top: 1pt; }
-  .entry .detail em { color: #333; }
+  .paper { margin-bottom: 4pt; break-inside: avoid; }
+  .paper-title { font-weight: 600; }
+  .paper .meta { font-size: 10pt; }
+  .abstract { font-size: 9.5pt; line-height: 1.27; margin-top: 2pt; text-align: justify; hyphens: auto; }
+  .abstract .lbl { font-style: italic; }
 
-  .paper-title { font-style: italic; }
+  .yr { display: flex; gap: 12pt; margin-bottom: 2.5pt; break-inside: avoid; }
+  .yr .y { flex: 0 0 34pt; font-weight: 600; }
+  .yr .b { flex: 1; }
+  .yr .b div + div { margin-top: 1pt; }
+  .sched { font-style: italic; color: #444; }
 
-  .inline-note { font-size: 9.5pt; color: #555; }
+  .kv { display: flex; gap: 10pt; margin-bottom: 2.5pt; }
+  .kv .k { flex: 0 0 92pt; font-weight: 600; }
+  .kv .v { flex: 1; }
 
-  /* year-tagged one-liners (presentations, awards) */
-  .year-row { display: flex; gap: 12pt; margin-bottom: 3.5pt; break-inside: avoid; }
-  .year-row .year { flex: 0 0 30pt; font-weight: bold; color: #003262; font-size: 9pt; padding-top: 0.5pt; }
-  .year-row .body { flex: 1; }
+  .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin-top: 2pt; }
+  .refs .rn { font-weight: 700; }
+  .refs div { font-size: 10pt; line-height: 1.32; }
 
-  /* skills */
-  .skill-row { display: flex; gap: 10pt; margin-bottom: 3.5pt; }
-  .skill-row .label { flex: 0 0 92pt; font-weight: bold; font-size: 9.5pt; }
-  .skill-row .body { flex: 1; }
-
-  /* references */
-  .refs { display: flex; gap: 14pt; margin-top: 4pt; }
-  .refs .ref { flex: 1; font-size: 9.5pt; line-height: 1.45; }
-  .refs .ref .ref-name { font-weight: bold; }
-  .refs .ref .ref-affil { color: #333; }
-  .refs .ref a { font-size: 9pt; }
-
-  .updated {
-    margin-top: 14pt;
-    font-size: 8pt;
-    color: #999;
-    text-align: center;
-  }
+  .sep2 { display: inline-block; width: 16pt; }
+  .h2-note { float: right; font-variant: normal; font-weight: 400; font-style: italic; letter-spacing: 0; font-size: 9.5pt; color: #444; padding-top: 1.5pt; }
+  .updated { margin-top: 10pt; font-size: 8.5pt; color: #888; text-align: right; font-style: italic; }
 </style>
 </head>
 <body>
@@ -130,259 +123,197 @@
   <div class="name">Ibrahim Goni Abdoulkadiri</div>
   <div class="subtitle">Ph.D. Candidate in Development Economics</div>
   <div class="contact">
-    CERDI — Université Clermont Auvergne, CNRS, IRD · 26 avenue Léon Blum, 63000 Clermont-Ferrand, France<br>
-    +33 7 49 93 78 63 ·
-    <a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr</a> ·
-    <a href="mailto:ibrahimgoni02@gmail.com">ibrahimgoni02@gmail.com</a><br>
-    <a href="https://ibgoni.github.io/">https://ibgoni.github.io/</a>
+    CERDI, Université Clermont Auvergne, CNRS, IRD<span class="sep">·</span>26 avenue Léon Blum, 63000 Clermont-Ferrand, France<br>
+    +33 7 49 93 78 63<span class="sep">·</span><a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr</a><span class="sep">·</span><a href="mailto:ibrahimgoni02@gmail.com">ibrahimgoni02@gmail.com</a><span class="sep">·</span><a href="https://ibgoni.github.io/">ibgoni.github.io</a>
   </div>
 </header>
 
 <h2>Education</h2>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Ph.D. in Economics</strong>, CERDI — Université Clermont Auvergne, CNRS, IRD, France</div>
-    <div class="date">2025–present</div>
-  </div>
-  <div class="detail">
-    Thesis: <em>Digital Transitions, Agricultural Transformation, and Ecological Trade-offs in Sub-Saharan Africa</em><br>
-    Supervisors: Vianney Dequiedt and Pierre Biscaye
-  </div>
+  <div class="row"><div class="l org">Université Clermont Auvergne, CERDI</div><div class="r">Clermont-Ferrand, France</div></div>
+  <div class="row"><div class="l role">Ph.D. in Economics</div><div class="r">2025–present</div></div>
+  <div class="detail">Dissertation: <em>Digital Transitions, Agricultural Transformation, and Ecological Trade-offs in Sub-Saharan Africa</em><br>
+  Advisors: Vianney Dequiedt and Pierre Biscaye</div>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>M.Sc. in Development Economics</strong>, CERDI — Université Clermont Auvergne, France</div>
-    <div class="date">2023–2025</div>
-  </div>
-  <div class="detail">High honors · Valedictorian</div>
+  <div class="row"><div class="l org">Université Clermont Auvergne, CERDI</div><div class="r">Clermont-Ferrand, France</div></div>
+  <div class="row"><div class="l role">M.Sc. in Development Economics</div><div class="r">2023–2025</div></div>
+  <div class="detail honors">Ranked first in class; high honors</div>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>M.Sc. in Project Analysis</strong>, Université Clermont Auvergne, France</div>
-    <div class="date">2024–2025</div>
-  </div>
-  <div class="detail">Honors</div>
+  <div class="row"><div class="l org">Université Clermont Auvergne</div><div class="r">Clermont-Ferrand, France</div></div>
+  <div class="row"><div class="l role">M.Sc. in Project Analysis</div><div class="r">2024–2025</div></div>
+  <div class="detail honors">Honors</div>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>B.Sc. in Economic Engineering</strong>, University of Dschang, Cameroon</div>
-    <div class="date">2021–2022</div>
-  </div>
-  <div class="detail">Honors · Valedictorian</div>
+  <div class="row"><div class="l org">University of Dschang</div><div class="r">Dschang, Cameroon</div></div>
+  <div class="row"><div class="l role">B.Sc. in Economic Engineering</div><div class="r">2021–2022</div></div>
+  <div class="detail honors">Ranked first in class; honors</div>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Advanced Technician Diploma in Statistics</strong>, ISSEA, Yaoundé, Cameroon</div>
-    <div class="date">2019–2021</div>
-  </div>
-  <div class="detail">Graduated with distinction</div>
+  <div class="row"><div class="l org">Sub-Regional Institute of Statistics and Applied Economics (ISSEA)</div><div class="r">Yaoundé, Cameroon</div></div>
+  <div class="row"><div class="l role">Advanced Technician Diploma in Statistics</div><div class="r">2019–2021</div></div>
+  <div class="detail honors">Ranked first in class; highest honors</div>
 </div>
 
 <h2>Research Fields</h2>
-<p>Development economics · Digital economics · Agricultural and environmental economics · Applied econometrics</p>
+<div class="kv"><div class="k">Primary</div><div class="v">Development economics, digital economics</div></div>
+<div class="kv"><div class="k">Secondary</div><div class="v">Agricultural and environmental economics, applied econometrics</div></div>
 
 <h2>Working Papers</h2>
 
-<div class="entry">
-  <div class="entry-head">
-    <div class="what"><span class="paper-title">“Wired for Growth? Broadband Internet and Local Development in Africa”</span></div>
-    <div class="date">Draft available</div>
-  </div>
-  <div class="detail">
-    Uses the 2009–2012 arrival of submarine fibre-optic cables in seventeen Sub-Saharan countries to estimate
-    the effect of broadband internet on local economic activity, and traces where the gains land along the
-    terrestrial backbone, mobile towers, and roads that carry the bandwidth to users.
-  </div>
+<div class="paper">
+  <div class="row"><div class="l"><span class="paper-title">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</span></div><div class="r">October 2026</div></div>
+  <div class="abstract"><span class="lbl">Abstract:</span> Where does fast internet raise local economic activity? I study the 2009–2012 arrival of submarine fibre-optic cables in seventeen sub-Saharan African countries. Using a heterogeneity-robust difference-in-differences estimator, I compare locations within ten kilometres of the pre-existing terrestrial backbone with locations ten to twenty kilometres away in the same country, before and after cable arrival. Gridded GDP rises by 0.7 percent and night lights by 7.3 percent on average. Gains are larger near 3G or 4G towers and smaller farther from roads and the electricity transmission network, suggesting that inland last mile infrastructure helps determine who benefits from greater international bandwidth. To examine what these gains mean for households, I apply the same design to survey data. I also find suggestive evidence of increases in consumption and assets. The clearest change is a five-percentage-point increase in the share of working-age adults in non-agricultural work, with no detectable change in overall employment.</div>
 </div>
 
 <h2>Work in Progress</h2>
 
-<div class="entry">
-  <div class="entry-head">
-    <div class="what">
-      <span class="paper-title">“Collusion in Willingness to Pay Elicitation Mechanisms”</span>,
-      with Sherry Banyout (ENS de Lyon), Pierre Biscaye (CERDI), Jules Gazeaud (CERDI), and Nada Rostom (University of Antwerp)
-    </div>
-    <div class="date">Data analysis</div>
+<div class="paper">
+  <span class="paper-title">Power Outages and Digital Payments: Evidence from Brazil</span>
+  <div class="meta">Draft in preparation</div>
+</div>
+
+<div class="paper">
+  <span class="paper-title">Collusion in Willingness to Pay Elicitation Mechanisms</span>
+  <div class="meta">with Sherry Banyout, Pierre Biscaye, Jules Gazeaud, and Nada Rostom</div>
+</div>
+
+<div class="paper">
+  <span class="paper-title">When the Internet’s Backbone Breaks: Submarine Cable Disruptions and Worker Access to Global Online Labor Markets</span>
+  <div class="meta">with Joël Cariolle</div>
+</div>
+
+<div class="paper">
+  <span class="paper-title">Climate Shocks and Price Dynamics: Does Market Integration Matter?</span>
+  <div class="meta">with Pierre Biscaye</div>
+</div>
+
+<div class="paper">
+  <span class="paper-title">Public Policies to Reduce the Impacts of the Food Sector on Biodiversity</span>
+  <div class="meta">with Céline Bonnet, Zohra Bouamra-Mechemache, Clélia Sirami, and Marine Coinon</div>
+</div>
+
+<h2>Presentations</h2>
+
+<div class="yr">
+  <div class="y">2027</div>
+  <div class="b">
+    <div>CSAE Conference: Economic Development in Africa, University of Oxford <span class="sched">(scheduled)</span></div>
+    <div>Kiel–CEPR–World Bank African Economic Development Conference, Rome <span class="sched">(scheduled)</span></div>
   </div>
+</div>
+<div class="yr">
+  <div class="y">2026</div>
+  <div class="b">
+    <div>CERDI Internal Seminar, Université Clermont Auvergne</div>
+    <div>West African Digital Transformations Forum, Research Workshop, Cotonou (presenter and discussant)</div>
+    <div>6th International Conference on Development Economics (ICDE), AFEDEV, Rouen</div>
+  </div>
+</div>
+<div class="yr">
+  <div class="y">2025</div>
+  <div class="b"><div>CERDI Internal Seminar, Université Clermont Auvergne</div></div>
+</div>
+
+<h2>Fellowships and Awards</h2>
+
+<div class="yr">
+  <div class="y">2027</div>
+  <div class="b">Conference travel grant, Kiel Institute for the World Economy</div>
+</div>
+<div class="yr">
+  <div class="y">2023</div>
+  <div class="b">Eiffel Excellence Scholarship, French Ministry for Europe and Foreign Affairs</div>
+</div>
+
+<h2>Teaching Experience <span class="h2-note">Materials at ibgoni.github.io/teaching.html</span></h2>
+
+<div class="entry">
+  <div class="row"><div class="l"><span class="org">Impact Evaluation</span>, Université Clermont Auvergne, CERDI</div><div class="r">2025–present</div></div>
+  <div class="row"><div class="l role">Teaching assistant (tutorials), Magistère in Development Economics, 3rd year</div></div>
+  <ul class="bul">
+    <li>Designed five tutorials (RCTs, RDD, DiD, matching, IV), each built on a published study replicated in Stata.</li>
+  </ul>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what">
-      <span class="paper-title">“When the Internet’s Backbone Breaks: Submarine Cable Disruptions and Worker Access to Global Online Labor Markets”</span>,
-      with Joël Cariolle (FERDI)
-    </div>
-    <div class="date">Data analysis</div>
-  </div>
+  <div class="row"><div class="l"><span class="org">Econometrics</span>, Université Clermont Auvergne, CERDI</div><div class="r">2025–present</div></div>
+  <div class="row"><div class="l role">Teaching assistant (tutorials), Magistère in Development Economics, 3rd year (2026–27); M.Sc., 1st year (2025–26)</div></div>
+  <ul class="bul">
+    <li>Five tutorials from the anatomy of OLS to instrumental variables, fixed effects, and dynamic panel GMM.</li>
+  </ul>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what">
-      <span class="paper-title">“Climate Shocks and Price Dynamics: Does Market Integration Matter?”</span>,
-      with Pierre Biscaye (CERDI)
-    </div>
-    <div class="date">Early stage</div>
-  </div>
+  <div class="row"><div class="l"><span class="org">Development Economics Seminar</span>, Université Clermont Auvergne, CERDI</div><div class="r">2025–2026</div></div>
+  <div class="row"><div class="l role">Doctoral tutor, Master 2 in Economic Analysis</div></div>
+  <ul class="bul">
+    <li>Prepared student presenters and discussants of recent research papers in development economics.</li>
+  </ul>
 </div>
 
-<div class="entry">
-  <div class="entry-head">
-    <div class="what">
-      <span class="paper-title">“Public Policies to Reduce the Impacts of the Food Sector on Biodiversity”</span>,
-      with Céline Bonnet, Zohra Bouamra-Mechemache, Clélia Sirami, and Marine Coinon
-    </div>
-  </div>
-</div>
 
 <h2>Research Experience</h2>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Research Assistant</strong>, Toulouse School of Economics &amp; INRAE, France</div>
-    <div class="date">Apr–Sep 2025</div>
-  </div>
-  <div class="detail">
-    Co-authored a paper on public policies to internalize the food sector’s biodiversity impacts: conducted the
-    literature review, built and cleaned the datasets, and drafted sections of the manuscript.
-  </div>
+  <div class="row"><div class="l org">Toulouse School of Economics and INRAE</div><div class="r">Toulouse, France</div></div>
+  <div class="row"><div class="l role">Research Assistant</div><div class="r">April–September 2025</div></div>
+  <ul class="bul">
+    <li>Co-authored a paper on public policies to internalize the food sector’s impacts on biodiversity: literature review, construction and cleaning of the datasets, drafting of manuscript sections.</li>
+  </ul>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Research Assistant</strong>, CERDI — CNRS, France</div>
-    <div class="date">May–Aug 2024</div>
-  </div>
-  <div class="detail">
-    Built a historical cross-country database of island colonization from archival and administrative sources;
-    systematically documented all sources, then applied multiple correspondence analysis and hierarchical
-    clustering.
-  </div>
-</div>
-
-<h2>Teaching Experience</h2>
-
-<div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Impact Analysis</strong>, teaching assistant, 2nd-year M.Sc., Université Clermont Auvergne</div>
-    <div class="date">2025–present</div>
-  </div>
-  <div class="detail">
-    Designed and led tutorials on randomized experiments, difference-in-differences, instrumental variables,
-    regression discontinuity, and matching; mentored students in Stata.
-  </div>
-</div>
-
-<div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Development Economics Seminar</strong>, teaching assistant, 2nd-year M.Sc., Université Clermont Auvergne</div>
-    <div class="date">2025–present</div>
-  </div>
-  <div class="detail">
-    Supervised student presentations and discussions of recent empirical research in development economics.
-  </div>
-</div>
-
-<div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Econometrics</strong>, teaching assistant, 1st-year M.Sc., Université Clermont Auvergne</div>
-    <div class="date">2025–present</div>
-  </div>
-  <div class="detail">
-    Led tutorial sessions on the linear regression model, statistical inference, and the treatment of endogeneity.
-  </div>
+  <div class="row"><div class="l org">CERDI, CNRS</div><div class="r">Clermont-Ferrand, France</div></div>
+  <div class="row"><div class="l role">Research Assistant</div><div class="r">May–August 2024</div></div>
+  <ul class="bul">
+    <li>Built a historical cross-country database on island colonization from archival and administrative sources, documented every source, and analyzed it with multiple correspondence analysis and hierarchical clustering.</li>
+  </ul>
 </div>
 
 <h2>Professional Experience</h2>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Statistician</strong>, Ministry of Finance, Yaoundé, Cameroon</div>
-    <div class="date">2022–2023</div>
-  </div>
-  <div class="detail">
-    Retrieved, reconciled, and analyzed national budgetary microdata and administrative records under tight
-    deadlines; prepared financial reports for government oversight committees.
-  </div>
+  <div class="row"><div class="l org">Ministry of Finance</div><div class="r">Yaoundé, Cameroon</div></div>
+  <div class="row"><div class="l role">Statistician</div><div class="r">2022–2023</div></div>
+  <ul class="bul">
+    <li>Retrieved, reconciled, and analyzed national budgetary microdata and administrative records; prepared financial reports for government oversight committees.</li>
+  </ul>
 </div>
 
 <div class="entry">
-  <div class="entry-head">
-    <div class="what"><strong>Data Analyst Intern</strong>, National Institute of Statistics, Yaoundé, Cameroon</div>
-    <div class="date">Mar–Jul 2021</div>
-  </div>
-  <div class="detail">
-    Mapped the socio-spatial profile of firms in Douala in QGIS: geocoded establishments, built performance
-    indicators, and analyzed spatial determinants of firm location.
-  </div>
+  <div class="row"><div class="l org">National Institute of Statistics</div><div class="r">Yaoundé, Cameroon</div></div>
+  <div class="row"><div class="l role">Data Analyst Intern</div><div class="r">March–July 2021</div></div>
+  <ul class="bul">
+    <li>Mapped the socio-spatial profile of firms in Douala in QGIS: geocoded establishments, built performance indicators, and analyzed the spatial determinants of firm location.</li>
+  </ul>
 </div>
 
-<h2>Seminars and Conferences</h2>
-
-<div class="year-row">
-  <div class="year">2026</div>
-  <div class="body">
-    6th International Conference on Development Economics (ICDE), French Association of Development Economics (AFEDEV), Rouen, France<br>
-    The West African Digital Transformations Forum, Cotonou, Benin
-  </div>
-</div>
-<div class="year-row">
-  <div class="year">2025</div>
-  <div class="body">CERDI Internal Seminar, Université Clermont Auvergne</div>
-</div>
-
-<h2>Honors, Scholarships, and Awards</h2>
-
-<div class="year-row">
-  <div class="year">2025</div>
-  <div class="body">Valedictorian, M.Sc. in Development Economics, Université Clermont Auvergne</div>
-</div>
-<div class="year-row">
-  <div class="year">2023</div>
-  <div class="body">Eiffel Excellence Scholarship, French Ministry for Europe and Foreign Affairs</div>
-</div>
-<div class="year-row">
-  <div class="year">2022</div>
-  <div class="body">Valedictorian, B.Sc. in Economic Engineering, University of Dschang</div>
-</div>
-
-<h2>Skills</h2>
-
-<div class="skill-row">
-  <div class="label">Statistics &amp; programming</div>
-  <div class="body">Stata (advanced) · R · Python (web scraping, microdata and geospatial processing) · QGIS · SPSS · LaTeX</div>
-</div>
-<div class="skill-row">
-  <div class="label">Data management</div>
-  <div class="body">Building and cleaning large historical and cross-country datasets; reproducible workflows</div>
-</div>
-<div class="skill-row">
-  <div class="label">Languages</div>
-  <div class="body">French (native) · English (professional) · Arabic (basic)</div>
-</div>
+<h2>Skills and Languages</h2>
+<div class="kv"><div class="k">Programming</div><div class="v">Stata (advanced), R, Python (web scraping, microdata and geospatial processing), QGIS, SPSS, LaTeX</div></div>
+<div class="kv"><div class="k">Data</div><div class="v">Construction and cleaning of large historical, geospatial, and cross-country datasets; reproducible workflows</div></div>
+<div class="kv"><div class="k">Languages</div><div class="v">French (native), English (professional), Arabic (basic)</div></div>
 
 <h2>References</h2>
-
 <div class="refs">
-  <div class="ref">
-    <div class="ref-name">Vianney Dequiedt</div>
-    <div class="ref-affil">CERDI, Université Clermont Auvergne</div>
+  <div>
+    <span class="rn">Vianney Dequiedt</span><br>
+    CERDI, Université Clermont Auvergne<br>
     <a href="mailto:Vianney.DEQUIEDT@uca.fr">Vianney.DEQUIEDT@uca.fr</a>
   </div>
-  <div class="ref">
-    <div class="ref-name">Pierre Biscaye</div>
-    <div class="ref-affil">CERDI, Université Clermont Auvergne</div>
+  <div>
+    <span class="rn">Pierre Biscaye</span><br>
+    CERDI, Université Clermont Auvergne<br>
     <a href="mailto:Pierre.BISCAYE@uca.fr">Pierre.BISCAYE@uca.fr</a>
   </div>
 </div>
 
-<div class="updated">Last updated: October 2026</div>
 
 </body>
 </html>

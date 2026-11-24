@@ -1,0 +1,7 @@
+{%- comment -%} "Presentations" line under a paper. Param: paper (id used in _data/talks.yml). {%- endcomment -%}
+{%- assign pt = site.data.talks | where: "paper", include.paper -%}
+{%- if pt.size > 0 %}
+<p class="presented"><span class="presented-label">Presentations</span>
+  {%- for t in pt %}<span class="presented-item" data-date="{{ t.date | date: '%Y-%m-%d' }}"{% if t.end %} data-end="{{ t.end | date: '%Y-%m-%d' }}"{% endif %}>{{ t.short | default: t.event }}</span>{% unless forloop.last %}<span class="presented-sep" aria-hidden="true">&middot;</span>{% endunless %}{% endfor %}
+</p>
+{%- endif %}

@@ -1,0 +1,21 @@
+{%- comment -%}
+  News list from _data/news.yml. Params: limit (items shown before the
+  "Earlier news" fold, default 6).
+{%- endcomment -%}
+{%- assign items = site.data.news -%}
+{%- assign limit = include.limit | default: 6 -%}
+<ol class="news-list">
+  {%- for n in items limit: limit %}
+  {% include news-item.html n=n %}
+  {%- endfor %}
+</ol>
+{%- if items.size > limit %}
+<details class="news-more">
+  <summary>Earlier news <span class="news-more-count">({{ items.size | minus: limit }})</span></summary>
+  <ol class="news-list">
+    {%- for n in items offset: limit %}
+    {% include news-item.html n=n %}
+    {%- endfor %}
+  </ol>
+</details>
+{%- endif %}

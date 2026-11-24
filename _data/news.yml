@@ -1,0 +1,66 @@
+# News on the home page, newest first. The six most recent items are shown;
+# older ones fold into "Earlier news". Items whose date is still to come get
+# an "Upcoming" badge automatically in the browser.
+#
+#   date       YYYY-MM-DD (precision: month or year if the day is unknown)
+#   end        last day, for multi-day events (optional)
+#   kind       Conference, Seminar, Paper, Teaching or Milestone
+#   text       one sentence; HTML links allowed
+
+- date: 2027-03-21
+  end: 2027-03-23
+  kind: Conference
+  text: >-
+    Invited to present <a href="/research.html#wired-for-growth"><em>Wired for Growth?</em></a>
+    at the <strong>CSAE Conference 2027: Economic Development in Africa</strong>,
+    University of Oxford, 21–23 March 2027.
+
+- date: 2027-01-28
+  end: 2027-01-29
+  kind: Conference
+  text: >-
+    <a href="/research.html#wired-for-growth"><em>Wired for Growth?</em></a> accepted at the
+    <strong>Kiel–CEPR–World Bank African Economic Development Conference</strong>
+    in Rome, 28–29 January 2027 — one of 21 papers selected from 540 submissions.
+
+- date: 2026-11-24
+  kind: Teaching
+  text: >-
+    Tutorial worksheets and data for <a href="/teaching/econometrics/">Econometrics</a>
+    and <a href="/teaching/impact-evaluation/">Impact Evaluation</a> are now online.
+
+- date: 2026-11-20
+  kind: Paper
+  text: >-
+    New work in progress: <a href="/research.html#power-outages">Power Outages and
+    Digital Payments: Evidence from Brazil</a>.
+
+- date: 2026-11-01
+  precision: month
+  kind: Seminar
+  text: Presented at the <strong>CERDI Internal Seminar</strong>, Clermont-Ferrand.
+
+- date: 2026-10-01
+  kind: Paper
+  text: >-
+    New version of <a href="/research.html#wired-for-growth"><em>Wired for Growth? Submarine
+    Cables, Inland Infrastructure, and Local Development in Africa</em></a>.
+
+- date: 2026-07-08
+  kind: Conference
+  text: >-
+    Presented and discussed at the <strong>West African Digital Transformations
+    Forum</strong>, Cotonou.
+
+- date: 2026-07-02
+  kind: Conference
+  text: >-
+    Presented at the <strong>6th International Conference on Development
+    Economics</strong> (AFEDEV), Rouen.
+
+- date: 2025-01-01
+  precision: year
+  kind: Milestone
+  text: >-
+    Started my Ph.D. at CERDI, presented at the CERDI Internal Seminar and joined
+    Université Clermont Auvergne as a graduate teaching assistant.
