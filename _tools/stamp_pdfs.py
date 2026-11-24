@@ -6,6 +6,7 @@ Stamping is idempotent: files already stamped are skipped.
 
 Usage (from the repository root):
     python _tools/stamp_pdfs.py teaching/econometrics/s01/worksheet/*.pdf
+    python _tools/stamp_pdfs.py --title "Econometrics, Session 1: worksheet" FILE.pdf
 
 Requires: pip install pypdf reportlab
 """
@@ -43,7 +44,7 @@ def footer_overlay(width: float, height: float, text: str) -> PdfReader:
     return PdfReader(buf)
 
 
-def stamp(pdf_path: Path) -> str:
+def stamp(pdf_path: Path, title: str = "") -> str:
     reader = PdfReader(pdf_path)
     meta = reader.metadata or {}
     if meta.get(MARK):
@@ -58,7 +59,7 @@ def stamp(pdf_path: Path) -> str:
         overlay = footer_overlay(float(box.width), float(box.height), text).pages[0]
         page.merge_page(overlay)
 
-    title = (meta.get("/Title") or "").strip() or pdf_path.stem.replace("_", " ")
+    title = title or (meta.get("/Title") or "").strip() or pdf_path.stem.replace("_", " ")
     writer.add_metadata({
         "/Author": AUTHOR,
         "/Title": title,
@@ -76,8 +77,12 @@ def stamp(pdf_path: Path) -> str:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    args = sys.argv[1:]
+    title = ""
+    if args[:1] == ["--title"] and len(args) >= 2:
+        title, args = args[1], args[2:]
+    if not args:
         sys.exit(__doc__)
-    for arg in sys.argv[1:]:
+    for arg in args:
         p = Path(arg)
-        print(f"{p}: {stamp(p)}")
+        print(f"{p}: {stamp(p, title)}")

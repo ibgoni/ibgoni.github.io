@@ -24,7 +24,9 @@
   </div>
   <div class="foot-bottom">
     <div class="inner">
-      <span>&copy; 2026 Ibrahim Goni Abdoulkadiri{% if page.course %} &middot; Teaching materials under <a href="{{ site.data.teaching.license.url }}" target="_blank" rel="noopener license">{{ site.data.teaching.license.name }}</a>{% endif %}</span>
+      {%- assign fc = nil -%}
+      {%- if page.course -%}{%- assign fc = site.data.teaching.courses | where: "id", page.course | first -%}{%- endif %}
+      <span>&copy; 2026 Ibrahim Goni Abdoulkadiri{% if fc and fc.materials != false %} &middot; Teaching materials under <a href="{{ site.data.teaching.license.url }}" target="_blank" rel="noopener license">{{ site.data.teaching.license.name }}</a>{% endif %}</span>
       <span>Last updated {{ site.time | date: "%B %Y" }}</span>
     </div>
   </div>

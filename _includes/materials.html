@@ -1,7 +1,8 @@
 {%- comment -%}
   Lists the files directly inside {{ include.base }}{{ include.dir }}/.
   Params: base (folder URL ending in /), dir, title, labels (optional hash
-  mapping file names to display names).
+  mapping file names to display names), notes (optional hash mapping file
+  names to a one-line description).
 {%- endcomment -%}
 {%- assign prefix = include.base | append: include.dir | append: "/" -%}
 {%- assign plen = prefix.size -%}
@@ -25,7 +26,13 @@
       {%- endcase -%}
       {%- assign label = f.name -%}
       {%- if include.labels and include.labels[f.name] -%}{%- assign label = include.labels[f.name] -%}{%- endif -%}
-      <li><a class="file" href="{{ f.path | relative_url }}"{% if ext == ".pdf" or ext == ".html" %} target="_blank" rel="noopener"{% else %} download{% endif %}><span class="ftype ftype-{{ kind | downcase }}">{{ kind }}</span><span class="fname">{{ label }}</span><span class="fact" aria-hidden="true">{% if ext == ".pdf" or ext == ".html" %}Open{% else %}Download{% endif %}</span></a></li>
+      {%- assign fnote = nil -%}
+      {%- if include.notes and include.notes[f.name] -%}{%- assign fnote = include.notes[f.name] -%}{%- endif -%}
+      {%- if include.dir == "worksheet" and label == f.name and ext == ".pdf" -%}
+        {%- assign label = "Student worksheet (French)" -%}
+        {%- assign fnote = f.name -%}
+      {%- endif -%}
+      <li><a class="file" href="{{ f.path | relative_url }}"{% if ext == ".pdf" or ext == ".html" %} target="_blank" rel="noopener"{% else %} download{% endif %}><span class="ftype ftype-{{ kind | downcase }}">{{ kind }}</span><span class="fname">{{ label }}{% if fnote %}<span class="fnote">{{ fnote }}</span>{% endif %}</span><span class="fact" aria-hidden="true">{% if ext == ".pdf" or ext == ".html" %}Open{% else %}Download{% endif %}</span></a></li>
     {%- endunless -%}
   {%- endif -%}
 {%- endfor -%}

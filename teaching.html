@@ -2,14 +2,14 @@
 layout: base
 nav: teaching
 title: Teaching
-description: "Teaching by Ibrahim Goni Abdoulkadiri at CERDI — Université Clermont Auvergne: econometrics, impact evaluation and development economics. Tutorial worksheets, data and code, openly available."
+description: "Teaching by Ibrahim Goni Abdoulkadiri at CERDI — Université Clermont Auvergne: tutorial worksheets and data for econometrics and impact evaluation, openly available."
 ---
 {%- assign T = site.data.teaching -%}
 <div class="page-title">
   <h1>Teaching</h1>
 </div>
 
-<p class="lede">I teach graduate tutorials at CERDI &mdash; Université Clermont Auvergne. The worksheets, data and code I design for these sessions are published here for students and for instructors elsewhere who teach the same methods.</p>
+<p class="lede">I teach graduate tutorials at CERDI &mdash; Université Clermont Auvergne. The worksheets I write for these sessions are published here with their data, for my students and for anyone who teaches or learns the same methods.</p>
 
 <section>
   <h2>Courses</h2>
@@ -21,14 +21,14 @@ description: "Teaching by Ibrahim Goni Abdoulkadiri at CERDI — Université Cle
       {%- assign fh = f.path | slice: 0, cl -%}
       {%- if fh == c.url and f.name != ".gitkeep" -%}{%- assign has_docs = true -%}{%- break -%}{%- endif -%}
     {%- endfor -%}
-    {%- if c.sessions.size > 0 or has_docs -%}{%- assign open = true -%}{%- else -%}{%- assign open = false -%}{%- endif %}
+    {%- if c.sessions.size > 0 or has_docs or c.reading_list -%}{%- assign open = true -%}{%- else -%}{%- assign open = false -%}{%- endif %}
     <article class="course-card{% unless open %} is-upcoming{% endunless %}">
       <p class="cc-meta">{{ c.programme }} &middot; {{ c.year }}</p>
       <h3>{% if open %}<a href="{{ c.url | relative_url }}">{{ c.title }}</a>{% else %}{{ c.title }}{% endif %}</h3>
       <p class="cc-role">{{ c.role }} &middot; {{ c.institution }}</p>
       <p class="cc-summary">{{ c.summary }}</p>
       {%- if open %}
-      <a class="cc-cta" href="{{ c.url | relative_url }}">{% if c.sessions.size > 0 %}{{ c.sessions.size }} session{% if c.sessions.size > 1 %}s{% endif %} available{% else %}Course documents{% endif %} <span aria-hidden="true">&rarr;</span></a>
+      <a class="cc-cta" href="{{ c.url | relative_url }}">{% if c.sessions.size > 0 %}{{ c.sessions.size }} session{% if c.sessions.size > 1 %}s{% endif %} available{% elsif c.cta %}{{ c.cta }}{% else %}Course documents{% endif %} <span aria-hidden="true">&rarr;</span></a>
       {%- else %}
       <p class="cc-soon">Materials coming soon</p>
       {%- endif %}
@@ -39,5 +39,5 @@ description: "Teaching by Ibrahim Goni Abdoulkadiri at CERDI — Université Cle
 
 <section>
   <h2>Using these materials</h2>
-  <p>All materials are &copy; {{ T.author }} and released under the <a href="{{ T.license.url }}" target="_blank" rel="noopener license">{{ T.license.long }}</a> licence: you may share them for non-commercial purposes, with attribution and without modification. Each session page gives a ready-to-copy citation. Instructors who would like to adapt the materials for their own course are welcome to <a href="mailto:{{ T.contact }}">get in touch</a>. Solutions are discussed in class and are not distributed online.</p>
+  <p>The worksheets published here are &copy; {{ T.author }} and released under the <a href="{{ T.license.url }}" target="_blank" rel="noopener license">{{ T.license.long }}</a> licence: you may share them for non-commercial purposes, with attribution and without modification. Each session page gives a ready-to-copy citation. Instructors who would like to adapt the materials for their own course are welcome to <a href="mailto:{{ T.contact }}">get in touch</a>. Solutions are discussed in class and are not distributed online. Datasets remain the work of the authors of the studies they come from.</p>
 </section>

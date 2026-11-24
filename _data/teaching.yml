@@ -4,8 +4,17 @@
 # Files are listed automatically: drop them into the session folder,
 # e.g. teaching/econometrics/s01/worksheet/, .../data/, .../code/,
 # .../readings/, .../slides/. A .zip at the session root is offered as
-# the one-click session package. Optional `labels` give a file a
-# readable name; otherwise its file name is shown.
+# the one-click session package (build it with _tools/build_packages.py).
+#
+# Session fields (all optional except id, number, title):
+#   title_local   original French title          question   guiding question
+#   created       date the material was written  published  date it went online
+#   intro         overview paragraph (French)    objectives list of strings
+#   plan          [{time, work}]                 exercises  list of exercise titles
+#   exit_label / exit                            closing written task
+#   applications  [{role, cite, ref, url, replication}]
+#   notes         {file name: one-line description shown under the file}
+#   external_data [{name, source, url, note}]   files that are linked, not hosted
 
 author: Ibrahim Goni Abdoulkadiri
 author_cite: Goni Abdoulkadiri, I.
@@ -28,6 +37,8 @@ groups:
     title: Readings
 
 courses:
+
+  # ------------------------------------------------------------------
   - id: econometrics
     url: /teaching/econometrics/
     title: Econometrics
@@ -39,39 +50,760 @@ courses:
     language: French
     software: Stata
     summary: >-
-      Tutorials for the graduate econometrics course of the Magistère. Each
-      session pairs an identification question with a published application
-      and its replication data, from the anatomy of OLS to panel-data and
-      instrumental-variable designs.
+      Five two-hour tutorials for the Magistère’s econometrics course. Each
+      session starts from a guiding question, works through a published
+      application on its original data, and ends with a short written
+      synthesis — from the anatomy of OLS and robust inference to
+      instrumental variables, fixed effects and dynamic panel GMM.
     earlier: "Previously taught at the 1st-year M.Sc. level (2025–26)."
-    sessions: []
+    complement: >-
+      Randomized experiments, regression discontinuity, matching and
+      difference-in-differences are covered in the
+      <a href="/teaching/impact-evaluation/">Impact Evaluation</a> tutorials.
+    sessions:
 
+      - id: s01
+        number: 1
+        title: Anatomy of OLS and interpretation
+        title_local: Anatomie des MCO et interprétation
+        created: 2026-09-22
+        published: 2026-11-24
+        question: Identifier la variation qui détermine un coefficient MCO.
+        intro: >-
+          La séance part d’une équation de salaire simple puis montre ce qui
+          change lorsque l’on ajoute des contrôles. Le théorème de Frisch Waugh
+          Lovell sert à visualiser la variation résiduelle d’éducation qui
+          identifie le coefficient. L’objectif n’est pas de qualifier trop vite
+          ce coefficient de causal, mais de savoir exactement ce que les MCO
+          comparent.
+        objectives:
+          - Lire et interpréter une équation niveau niveau, log niveau et un terme quadratique.
+          - Distinguer coefficient brut, association conditionnelle et effet causal.
+          - Vérifier numériquement le théorème de Frisch Waugh Lovell.
+          - Interpréter une interaction sans lire isolément chacun de ses coefficients.
+          - Structurer un do-file reproductible avec contrôles, graphiques et résultats enregistrés.
+        plan:
+          - { time: "0–15 min", work: "Prise en main de la base et formulation de la question économique" }
+          - { time: "15–45 min", work: "Régressions simple et multiple et interprétation" }
+          - { time: "45–80 min", work: "Anatomie de la régression et résidualisation" }
+          - { time: "80–110 min", work: "Formes fonctionnelles et interaction" }
+          - { time: "110–120 min", work: "Synthèse écrite individuelle" }
+        exercises:
+          - Décrire avant d’estimer
+          - Du coefficient brut au coefficient conditionnel
+          - Voir la variation utilisée par les MCO
+          - Hétérogénéité et interaction
+        exit_label: Exit ticket
+        exit: >-
+          En six lignes, expliquer quelle variation identifie le coefficient de
+          educ dans le modèle multiple et pourquoi cette variation peut encore
+          être corrélée à des déterminants non observés du salaire.
+        applications:
+          - role: Application
+            cite: Card (1995)
+            ref: >-
+              Card, D. (1995). Using Geographic Variation in College Proximity to
+              Estimate the Return to Schooling. In L. N. Christofides, E. K. Grant
+              and R. Swidinsky (eds), Aspects of Labour Market Behaviour: Essays in
+              Honour of John Vanderkamp, 201–222. University of Toronto Press
+              (NBER Working Paper 4483).
+            url: https://doi.org/10.3386/w4483
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          card.dta: "Card (1995): 3,010 men of the NLS Young Men cohort, wages observed in 1976."
+
+      - id: s02
+        number: 2
+        title: Robust inference and diagnostics
+        title_local: Inférence robuste et diagnostic
+        created: 2026-09-22
+        published: 2026-11-24
+        question: Séparer problème d’inférence, spécification et influence.
+        intro: >-
+          Cette séance traite les diagnostics comme des outils de raisonnement
+          et non comme une liste de tests. Les étudiants analysent une
+          régression reliant protection contre l’expropriation et revenu par
+          tête. Ils distinguent ce qui affecte les écarts types, ce qui signale
+          une forme fonctionnelle fragile et ce qui rend un résultat dépendant
+          de quelques observations.
+        objectives:
+          - Distinguer biais des coefficients et invalidité des écarts types usuels.
+          - Lire un graphique résidus valeurs ajustées avant de lancer un test.
+          - Calculer et interpréter levier, résidu studentisé et distance de Cook.
+          - Comparer erreurs usuelles et robustes sans réestimer les coefficients.
+          - Utiliser RESET comme signal de spécification, sans en faire un diagnostic causal.
+        plan:
+          - { time: "0–20 min", work: "Régression de référence et graphiques de résidus" }
+          - { time: "20–50 min", work: "Hétéroscédasticité et inférence robuste" }
+          - { time: "50–85 min", work: "Levier, influence et analyse de sensibilité" }
+          - { time: "85–110 min", work: "Forme fonctionnelle et variables omises" }
+          - { time: "110–120 min", work: "Note de diagnostic" }
+        exercises:
+          - Régression et résidus
+          - Hétéroscédasticité et écarts types robustes
+          - Influence et sensibilité
+          - Spécification
+        exit_label: Exit ticket
+        exit: >-
+          Donner un exemple de problème corrigé par des écarts types robustes et
+          un exemple de problème qu’ils ne corrigent pas. Préciser dans chaque
+          cas l’objet qui devient invalide.
+        applications:
+          - role: Application
+            cite: Acemoglu, Johnson and Robinson (2001)
+            ref: >-
+              Acemoglu, D., Johnson, S. and Robinson, J. A. (2001). The Colonial
+              Origins of Comparative Development: An Empirical Investigation.
+              American Economic Review 91(5): 1369–1401.
+            url: https://doi.org/10.1257/aer.91.5.1369
+          - role: Method
+            cite: White (1980)
+            ref: >-
+              White, H. (1980). A Heteroskedasticity-Consistent Covariance Matrix
+              Estimator and a Direct Test for Heteroskedasticity. Econometrica
+              48(4): 817–838.
+            url: https://doi.org/10.2307/1912934
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          colonial_origins.dta: "Acemoglu, Johnson and Robinson (2001): former colonies; the session uses the 64-country base sample (baseco = 1)."
+
+      - id: s03
+        number: 3
+        title: Instrumental variables and two-stage least squares
+        title_local: Variables instrumentales et doubles moindres carrés
+        created: 2026-09-22
+        published: 2026-11-24
+        question: Défendre et diagnostiquer une stratégie instrumentale.
+        intro: >-
+          La séance reprend la relation entre institutions et revenu mais traite
+          explicitement l’endogénéité de avexpr. Les étudiants construisent la
+          première étape, la forme réduite et l’estimation en doubles moindres
+          carrés. L’accent porte sur l’argument d’exclusion, la faiblesse
+          possible de l’instrument et la population à laquelle l’estimation se
+          rapporte.
+        objectives:
+          - Expliquer les trois sources usuelles d’endogénéité dans une application précise.
+          - Distinguer pertinence, exclusion et indépendance de l’instrument.
+          - Relier première étape, forme réduite et estimateur IV.
+          - Lire un diagnostic d’instrument faible et un test de suridentification avec prudence.
+          - Comparer MCO et IV sans attribuer mécaniquement leur différence à un biais unique.
+        plan:
+          - { time: "0–20 min", work: "Mécanismes d’endogénéité et graphe causal verbal" }
+          - { time: "20–50 min", work: "Première étape et forme réduite" }
+          - { time: "50–80 min", work: "Doubles moindres carrés manuels et commande ivregress" }
+          - { time: "80–105 min", work: "Faiblesse, suridentification et robustesse" }
+          - { time: "105–120 min", work: "Défense orale de l’instrument" }
+        exercises:
+          - Pourquoi instrumenter
+          - Première étape et forme réduite
+          - Estimation IV
+          - Suridentification et crédibilité
+        exit_label: Exit ticket
+        exit: >-
+          Écrire une justification de l’instrument en quatre phrases : mécanisme
+          de pertinence, restriction d’exclusion, menace principale, diagnostic
+          empirique disponible.
+        applications:
+          - role: Application
+            cite: Acemoglu, Johnson and Robinson (2001)
+            ref: >-
+              Acemoglu, D., Johnson, S. and Robinson, J. A. (2001). The Colonial
+              Origins of Comparative Development: An Empirical Investigation.
+              American Economic Review 91(5): 1369–1401.
+            url: https://doi.org/10.1257/aer.91.5.1369
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          colonial_origins.dta: "Same data as Session 2, with settler mortality (logem4) and European settlement in 1900 (euro1900)."
+
+      - id: s04
+        number: 4
+        title: Panel data and fixed effects
+        title_local: Données de panel et effets fixes
+        created: 2026-09-22
+        published: 2026-11-24
+        question: Identifier la variation within et choisir le niveau de regroupement.
+        intro: >-
+          La séance exploite dix années d’observations sur 532 individus. Elle
+          montre pourquoi les MCO groupés mélangent variation entre individus et
+          variation au cours du temps, puis comment l’estimateur à effets fixes
+          isole les écarts à la moyenne individuelle. Le choix des écarts types
+          est relié à la dépendance des erreurs au sein de chaque individu.
+        objectives:
+          - Décrire un panel et distinguer variation within et between.
+          - Dériver et reproduire la transformation within.
+          - Interpréter un coefficient à effets fixes comme comparaison intra individuelle.
+          - Comprendre l’hypothèse plus forte du modèle à effets aléatoires.
+          - Choisir des écarts types groupés au niveau de l’unité d’observation répétée.
+        plan:
+          - { time: "0–20 min", work: "Structure du panel et décomposition de la variation" }
+          - { time: "20–50 min", work: "MCO groupés et effets fixes" }
+          - { time: "50–80 min", work: "Transformation within manuelle et effets temporels" }
+          - { time: "80–105 min", work: "Effets aléatoires et test de Hausman" }
+          - { time: "105–120 min", work: "Inférence groupée et synthèse" }
+        exercises:
+          - Décrire la variation du panel
+          - MCO groupés et effets fixes
+          - Transformation within
+          - Effets aléatoires et choix du modèle
+        exit_label: Exit ticket
+        exit: >-
+          En cinq lignes, expliquer à quel contrefactuel descriptif correspond le
+          coefficient FE de lnwg et citer une source d’endogénéité qui demeure
+          après effets fixes individuels et temporels.
+        applications:
+          - role: Application
+            cite: Ziliak (1997)
+            ref: >-
+              Ziliak, J. P. (1997). Efficient Estimation with Panel Data When
+              Instruments Are Predetermined: An Empirical Comparison of
+              Moment-Condition Estimators. Journal of Business & Economic
+              Statistics 15(4): 419–431.
+            url: https://doi.org/10.1080/07350015.1997.10524720
+          - role: Method
+            cite: Mundlak (1978)
+            ref: >-
+              Mundlak, Y. (1978). On the Pooling of Time Series and Cross Section
+              Data. Econometrica 46(1): 69–85.
+            url: https://doi.org/10.2307/1913646
+          - role: Method
+            cite: Wooldridge (2010)
+            ref: >-
+              Wooldridge, J. M. (2010). Econometric Analysis of Cross Section and
+              Panel Data, 2nd ed. MIT Press.
+        notes:
+          labor_supply.dta: "Ziliak (1997): balanced panel of 532 individuals observed from 1979 to 1988 (5,320 observations)."
+
+      - id: s05
+        number: 5
+        title: Dynamic panels and GMM
+        title_local: Panel dynamique et GMM
+        created: 2026-09-22
+        published: 2026-11-24
+        question: Spécifier et auditer une estimation GMM dynamique.
+        intro: >-
+          La dernière séance part du modèle de la séance 4 et ajoute le retard
+          des heures travaillées. Les étudiants observent le biais opposé des MCO
+          groupés et de l’estimateur within, construisent les instruments
+          internes en différence première, puis évaluent une estimation GMM à
+          partir des tests AR, du test de Hansen et du nombre d’instruments.
+        objectives:
+          - Expliquer le biais de Nickell dans un panel court.
+          - Construire les conditions de moments de la GMM en différences.
+          - Classer une variable comme strictement exogène, prédéterminée ou endogène.
+          - Interpréter AR1, AR2, Hansen et les tests différentiels.
+          - Limiter la prolifération instrumentale par la profondeur des retards et collapse.
+        plan:
+          - { time: "0–25 min", work: "Biais dynamique et bornes pooled FE" }
+          - { time: "25–55 min", work: "Différenciation et choix des instruments" }
+          - { time: "55–90 min", work: "Estimations GMM et classification des variables" }
+          - { time: "90–110 min", work: "Diagnostics et prolifération instrumentale" }
+          - { time: "110–120 min", work: "Défense finale de la spécification" }
+        exercises:
+          - Encadrer la persistance
+          - Conditions de moments
+          - Difference GMM et System GMM
+          - Audit du modèle
+        exit_label: Exit ticket
+        exit: >-
+          Choisir une spécification GMM et la défendre en dix lignes en
+          indiquant statut des variables, plage de retards, nombre
+          d’instruments, AR2, Hansen et principale limite substantielle.
+        applications:
+          - role: Application
+            cite: Ziliak (1997)
+            ref: >-
+              Ziliak, J. P. (1997). Efficient Estimation with Panel Data When
+              Instruments Are Predetermined: An Empirical Comparison of
+              Moment-Condition Estimators. Journal of Business & Economic
+              Statistics 15(4): 419–431.
+            url: https://doi.org/10.1080/07350015.1997.10524720
+          - role: Method
+            cite: Arellano and Bond (1991)
+            ref: >-
+              Arellano, M. and Bond, S. (1991). Some Tests of Specification for
+              Panel Data: Monte Carlo Evidence and an Application to Employment
+              Equations. Review of Economic Studies 58(2): 277–297.
+            url: https://doi.org/10.2307/2297968
+          - role: Method
+            cite: Blundell and Bond (1998)
+            ref: >-
+              Blundell, R. and Bond, S. (1998). Initial Conditions and Moment
+              Restrictions in Dynamic Panel Data Models. Journal of Econometrics
+              87(1): 115–143.
+            url: https://doi.org/10.1016/S0304-4076(98)00009-8
+          - role: Method
+            cite: Roodman (2009)
+            ref: >-
+              Roodman, D. (2009). A Note on the Theme of Too Many Instruments.
+              Oxford Bulletin of Economics and Statistics 71(1): 135–158.
+            url: https://doi.org/10.1111/j.1468-0084.2008.00542.x
+        notes:
+          labor_supply.dta: "Ziliak (1997): the version of the Session 4 panel prepared for the dynamic model."
+
+  # ------------------------------------------------------------------
   - id: impact-evaluation
     url: /teaching/impact-evaluation/
     title: Impact Evaluation
-    programme: 2nd-year M.Sc.
-    institution: Université Clermont Auvergne
+    title_local: Évaluation d’impact
+    programme: Magistère in Development Economics, 3rd year
+    institution: CERDI — Université Clermont Auvergne
     year: "2026–27"
     role: Teaching assistant (tutorials)
     language: French
+    software: Stata
     summary: >-
-      Graduate course on the design and econometrics of impact evaluation.
-      The applied sessions take randomized experiments, difference-in-differences,
-      instrumental-variable and regression-discontinuity designs from
-      identification assumptions to implementation on real data.
-    sessions: []
+      Five applied tutorials on the main designs of impact evaluation:
+      randomized experiments, regression discontinuity,
+      difference-in-differences, matching and instrumental variables. Each
+      session is built around a published study in development economics,
+      replicated in Stata on the authors’ data, and an extension that carries
+      the method to a second setting.
+    complement: >-
+      The anatomy of OLS, robust inference, instrumental variables and panel
+      data are developed in the <a href="/teaching/econometrics/">Econometrics</a>
+      tutorials.
+    format_title: How a session works
+    format_intro: >-
+      The worksheet is self-contained: for each application it sets out the
+      variables, the estimand, the specification, the diagnostics and the
+      results to report, so the analysis can be redone at home.
+    format:
+      - { time: "15–20 min", work: "A team of students presents the article." }
+      - { time: "≈ 40 min", work: "Guided discussion: predictions are written down before any result is shown." }
+      - { time: "30–35 min", work: "Stata workshop: each command is explained, typed and run by the students." }
+      - { time: "10–15 min", work: "Wrap-up: results are compared and the main threat to identification is named." }
+    sessions:
 
+      - id: s01
+        number: 1
+        title: Randomized controlled trials
+        title_local: "Expériences aléatoires contrôlées (RCT) : assignation, intention de traiter et interférences"
+        created: 2026-11-08
+        published: 2026-11-24
+        question: À qui transmettre l’information pour que les habitants puissent en tirer parti ?
+        intro: >-
+          Au Mozambique, la découverte de gaz naturel soulève une question
+          concrète : à qui transmettre l’information pour que les habitants
+          puissent en tirer parti ? Le tirage au sort d’Armand et al. (2020)
+          permet de comparer une information réservée au chef local à une
+          information diffusée aux habitants. À partir de cette expérience, nous
+          distinguerons l’effet de l’offre et l’effet de la participation, puis
+          nous verrons comment le niveau du tirage détermine l’inférence. L’étude
+          de Crépon et al. (2013) pose une dernière question : un programme
+          d’emploi peut-il modifier les chances de trouver un poste pour des
+          personnes à qui il n’a pas été proposé ?
+        exercises:
+          - Offre, participation et adhésion imparfaite (imperfect compliance)
+          - Ce que garantit réellement le tirage
+          - Avant l’estimation
+          - Estimation et lecture des résultats
+          - Reconstituer les trois comparaisons
+        exit_label: End-of-session synthesis
+        exit: >-
+          Rédigez un paragraphe de six à huit lignes. Identifiez l’unité de
+          randomisation, les modes de diffusion comparés et les effets estimés.
+          Précisez le niveau de regroupement et le mécanisme proposé. Terminez
+          par une phrase sur ce que l’étude de Crépon et al. permet d’apprendre
+          sur les interférences.
+        applications:
+          - role: Application
+            cite: Armand et al. (2020)
+            ref: >-
+              Armand, A., Coutts, A., Vicente, P. C. and Vilela, I. (2020). Does
+              Information Break the Political Resource Curse? Experimental
+              Evidence from Mozambique. American Economic Review 110(11):
+              3431–3453.
+            url: https://doi.org/10.1257/aer.20190842
+            replication: https://doi.org/10.3886/E119785V1
+          - role: Extension
+            cite: Crépon et al. (2013)
+            ref: >-
+              Crépon, B., Duflo, E., Gurgand, M., Rathelot, R. and Zamora, P.
+              (2013). Do Labor Market Policies Have Displacement Effects? Evidence
+              from a Clustered Randomized Experiment. Quarterly Journal of
+              Economics 128(2): 531–580.
+            url: https://doi.org/10.1093/qje/qjt001
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press,
+              chapters 2 and 8.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          extension_crepon2013.dta: "Extension (exercise 5): teaching extract for Crépon et al. (2013) — young job seekers, assignment, treated areas and randomization blocks."
+        external_data:
+          - name: MozNatRes_Mozambique.dta
+            source: Armand et al. (2020), replication package
+            url: https://doi.org/10.3886/E119785V1
+            note: "Main application (exercises 3–4): the authors’ file, used unmodified — 4,168 household-year observations in 206 communities."
+
+      - id: s02
+        number: 2
+        title: Regression discontinuity
+        title_local: "Régression sur discontinuité (RDD) : identification au seuil et choix de la fenêtre d’estimation"
+        created: 2026-11-08
+        published: 2026-11-24
+        question: La prévalence du VIH présente-t-elle un saut à la frontière, et peut-on l’attribuer au changement de régime juridique ?
+        intro: >-
+          À la frontière entre deux pays, que peut-on apprendre en comparant des
+          femmes qui vivent à quelques kilomètres les unes des autres, de part et
+          d’autre de la frontière ? Chez Anderson (2018), certaines de ces
+          frontières traversent un même territoire ethnique et séparent deux
+          régimes juridiques. La question empirique est de savoir si la
+          prévalence du VIH présente un saut à cet endroit et si l’on peut
+          l’attribuer au changement de régime. Vous apprendrez à lire ce saut sur
+          un graphique puis à l’estimer. Vous examinerez ensuite ce qui change
+          lorsqu’on resserre la fenêtre d’estimation ou qu’on autorise des
+          profils différents de part et d’autre du seuil.
+        exercises:
+          - Pourquoi recentrer ?
+          - Choisir une fenêtre d’estimation
+          - Tracer les profils de prévalence
+          - Estimer le saut et examiner sa sensibilité
+          - Mettre l’interprétation à l’épreuve
+          - Le seuil de 30 ans et les comparaisons de contrôle
+        exit_label: End-of-session synthesis
+        exit: >-
+          En six à huit lignes, présentez le résultat d’Anderson pour la fenêtre
+          de 100 km. Indiquez les personnes comparées, le sens de la distance
+          signée et l’ampleur du saut en points de pourcentage. Expliquez
+          brièvement le rôle des effets fixes de territoire ethnique et le
+          mécanisme proposé. Terminez par deux autres différences qui pourraient
+          survenir à la frontière et compliquer l’interprétation.
+        applications:
+          - role: Application
+            cite: Anderson (2018)
+            ref: >-
+              Anderson, S. (2018). Legal Origins and Female HIV. American Economic
+              Review 108(6): 1407–1439.
+            url: https://doi.org/10.1257/aer.20151047
+            replication: https://doi.org/10.3886/E113080V1
+          - role: Extension
+            cite: Lemieux and Milligan (2008)
+            ref: >-
+              Lemieux, T. and Milligan, K. (2008). Incentive Effects of Social
+              Assistance: A Regression Discontinuity Approach. Journal of
+              Econometrics 142(2): 807–828.
+            url: https://doi.org/10.1016/j.jeconom.2007.05.014
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press,
+              chapter 6.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          extension_lemieux_milligan2008.dta: "Extension (exercise 6): employment rates by age, census year and region (Quebec or rest of Canada), with cell sizes used as weights."
+        external_data:
+          - name: hiv-figure2a.dta
+            source: Anderson (2018), replication package
+            url: https://doi.org/10.3886/E113080V1
+            note: "Exercise 3: observations used to draw Figure 2A."
+          - name: hiv-table1.dta
+            source: Anderson (2018), replication package
+            url: https://doi.org/10.3886/E113080V1
+            note: "Exercise 4: reproduces the first three columns of Table 1."
+
+      - id: s03
+        number: 3
+        title: Difference-in-differences
+        title_local: "Doubles différences (DiD) : tendances parallèles, effets fixes et étude d’événement"
+        created: 2026-11-08
+        published: 2026-11-24
+        question: Si l’emploi augmente près du réseau terrestre, comment distinguer l’effet d’Internet d’une reprise économique générale ?
+        intro: >-
+          L’arrivée d’un câble sous-marin rend le haut débit accessible dans une
+          partie d’un pays. Si l’emploi augmente près du réseau terrestre,
+          comment distinguer l’effet d’Internet d’une reprise économique
+          générale ? Hjort et Poulsen (2019) comparent l’évolution de l’emploi
+          près du réseau à celle de zones plus éloignées. Les exercices 1 et 2
+          construisent la double différence et son contrefactuel. Dans les
+          exercices 3 à 5, on reprend les estimations pour l’Afrique du Sud, puis
+          on trace une étude d’événement. L’exercice 6 examine une réforme
+          adoptée à des dates différentes selon les États américains.
+        exercises:
+          - Construire le contrefactuel
+          - Effets fixes et erreurs-types
+          - Comprendre la variation disponible
+          - Estimer l’effet sur l’emploi
+          - Étude d’événement
+          - Comparer des réformes adoptées à des dates différentes
+        exit_label: End-of-session synthesis
+        exit: >-
+          En six à huit lignes, indiquez les zones comparées et la date d’arrivée
+          du câble en Afrique du Sud. Donnez le coefficient sur l’emploi et son
+          erreur-type. Expliquez ce que le graphique et le test des coefficients
+          antérieurs permettent de dire, puis proposez une limite à la
+          généralisation du résultat.
+        applications:
+          - role: Application
+            cite: Hjort and Poulsen (2019)
+            ref: >-
+              Hjort, J. and Poulsen, J. (2019). The Arrival of Fast Internet and
+              Employment in Africa. American Economic Review 109(3): 1032–1079.
+            url: https://doi.org/10.1257/aer.20161385
+            replication: https://doi.org/10.3886/E113156V1
+          - role: Extension
+            cite: Autor (2003)
+            ref: >-
+              Autor, D. H. (2003). Outsourcing at Will: The Contribution of Unjust
+              Dismissal Doctrine to the Growth of Employment Outsourcing. Journal
+              of Labor Economics 21(1): 1–42.
+            url: https://doi.org/10.1086/344122
+        notes:
+          extension_autor2003.dta: "Extension (exercise 6): U.S. states adopting unjust-dismissal doctrines at different dates."
+        external_data:
+          - name: qlfs.dta
+            source: Hjort and Poulsen (2019), replication package
+            url: https://doi.org/10.3886/E113156V1
+            note: "Exercises 3–5 use an extract of this file, saved as article_principal_hjort_poulsen2019_extrait_officiel.dta: keep eacode time connected treatment employed formal informal distance hoursworked q422more, then keep if time < 20103 & distance < 0.1 (464,958 observations)."
+
+      - id: s04
+        number: 4
+        title: Matching and selection on observables
+        title_local: "Appariement et sélection sur observables : population comparable, support commun et balance"
+        created: 2026-11-08
+        published: 2026-11-24
+        question: Les membres d’une coopérative vendent-ils plus grâce à de meilleurs débouchés, ou parce qu’ils possédaient déjà de plus grandes exploitations ?
+        intro: >-
+          Les membres d’une coopérative peuvent vendre plus parce qu’ils ont
+          accès à de meilleurs débouchés, ou parce qu’ils possédaient déjà de
+          plus grandes exploitations. Pour distinguer ces deux explications, on
+          cherche des producteurs non membres qui leur ressemblent avant
+          l’adhésion. Dans les exercices 1 et 2, vous choisirez les
+          caractéristiques à retenir et apprendrez à reconnaître un mauvais
+          appariement. Dans les exercices 3 à 5, on estime l’effet moyen chez les
+          membres (ATT), puis on vérifie l’équilibre des covariables.
+          L’exercice 6 compare l’appariement et la pondération dans une étude du
+          tabagisme maternel.
+        exercises:
+          - Choisir les covariables avant d’estimer
+          - Support commun
+          - Diagnostiquer la sélection
+          - Du support à l’effet
+          - Ce que l’appariement ne peut pas faire
+          - Comparer les estimations chez les mères fumeuses
+        exit_label: End-of-session synthesis
+        exit: >-
+          En six à huit lignes, indiquez qui est comparé dans l’exercice sur les
+          coopératives. Interprétez les résultats de l’appariement sur la part
+          vendue et le prix. Expliquez ce que montrent le graphique des scores et
+          les écarts standardisés, puis donnez un exemple de sélection qui
+          pourrait subsister.
+        applications:
+          - role: Application
+            cite: Bernard, Taffesse and Gabre-Madhin (2008)
+            ref: >-
+              Bernard, T., Taffesse, A. S. and Gabre-Madhin, E. (2008). Impact of
+              Cooperatives on Smallholders’ Commercialization Behavior: Evidence
+              from Ethiopia. Agricultural Economics 39(2): 147–161.
+            url: https://doi.org/10.1111/j.1574-0862.2008.00324.x
+          - role: Extension
+            cite: Cattaneo (2010)
+            ref: >-
+              Cattaneo, M. D. (2010). Efficient Semiparametric Estimation of
+              Multi-valued Treatment Effects under Ignorability. Journal of
+              Econometrics 155(2): 138–154.
+            url: https://doi.org/10.1016/j.jeconom.2009.09.023
+          - role: Method
+            cite: Rosenbaum and Rubin (1983)
+            ref: >-
+              Rosenbaum, P. R. and Rubin, D. B. (1983). The Central Role of the
+              Propensity Score in Observational Studies for Causal Effects.
+              Biometrika 70(1): 41–55.
+            url: https://doi.org/10.1093/biomet/70.1.41
+        notes:
+          base_classe_bernard_et_al2008.dta: "Main application: simulated teaching data calibrated on the sample published by Bernard et al. (2008) — 2,532 households, 150 cooperative members. Not the authors’ data; not for research use."
+          extension_cattaneo2010.dta: "Extension (exercise 6): the cattaneo2 birth-weight data distributed with Stata (also available with webuse cattaneo2)."
+
+      - id: s05
+        number: 5
+        title: Instrumental variables and local effects
+        title_local: "Variables instrumentales (IV) : premier stade, exclusion, 2SLS et population des compliers"
+        created: 2026-11-08
+        published: 2026-11-24
+        question: Si l’emploi augmente après l’offre, comment en déduire l’effet de la formation elle-même ?
+        intro: >-
+          Une offre de formation peut amener certaines personnes à s’inscrire.
+          Si l’emploi augmente après l’offre, comment en déduire l’effet de la
+          formation elle-même ? Le ratio de Wald compare la variation de
+          l’emploi à celle de la participation. Les exercices 1 et 2 distinguent
+          le premier stade, la forme réduite et la restriction d’exclusion. Les
+          exercices 3 à 5 reprennent cette démarche pour étudier le lien entre la
+          traite historique et la confiance. L’exercice 6 s’appuie sur les règles
+          de scolarité obligatoire pour estimer le rendement de l’éducation.
+        exercises:
+          - Calcul et interprétation
+          - Les quatre hypothèses
+          - Le mécanisme avant l’estimation
+          - Reconstruire le 2SLS
+          - Force et validité de l’instrument
+          - Du trimestre de naissance au rendement de la scolarité
+        exit_label: End-of-session synthesis
+        exit: >-
+          En six à huit lignes, présentez l’instrument historique et le signe du
+          premier stade. Donnez la forme réduite et le résultat 2SLS, avec son
+          unité et son erreur-type regroupée. Comparez avec le coefficient publié
+          et décrivez un autre chemin par lequel la distance à la côte pourrait
+          agir sur la confiance.
+        applications:
+          - role: Application
+            cite: Nunn and Wantchekon (2011)
+            ref: >-
+              Nunn, N. and Wantchekon, L. (2011). The Slave Trade and the Origins
+              of Mistrust in Africa. American Economic Review 101(7): 3221–3252.
+            url: https://doi.org/10.1257/aer.101.7.3221
+            replication: https://doi.org/10.3886/E112479V1
+          - role: Extension
+            cite: Angrist and Krueger (1991)
+            ref: >-
+              Angrist, J. D. and Krueger, A. B. (1991). Does Compulsory School
+              Attendance Affect Schooling and Earnings? Quarterly Journal of
+              Economics 106(4): 979–1014.
+            url: https://doi.org/10.2307/2937954
+          - role: Method
+            cite: Angrist and Pischke (2009)
+            ref: >-
+              Angrist, J. D. and Pischke, J.-S. (2009). Mostly Harmless
+              Econometrics: An Empiricist’s Companion. Princeton University Press,
+              chapter 4.
+            url: https://doi.org/10.1515/9781400829828
+        notes:
+          extension_angrist_krueger1991.dta: "Extension (exercise 6): teaching extract of the Angrist and Krueger (1991) data on quarter of birth, schooling and earnings."
+        external_data:
+          - name: Nunn_Wantchekon_AER_2011.dta
+            source: Nunn and Wantchekon (2011), replication package
+            url: https://doi.org/10.3886/E112479V1
+            note: "Main application (exercises 3–5): the authors’ file, used unmodified (21,822 observations); the worksheet refers to it as article_principal_nunn_wantchekon2011.dta."
+
+  # ------------------------------------------------------------------
   - id: development-seminar
     url: /teaching/development-seminar/
     title: Development Economics Seminar
-    programme: 2nd-year M.Sc.
-    institution: Université Clermont Auvergne
+    title_local: Séminaire d’Économie du Développement (SED)
+    programme: Master 2 in Economic Analysis
+    institution: CERDI — Université Clermont Auvergne
     year: "2025–26"
-    role: Tutor
+    role: Doctoral tutor
     language: French
+    materials: false
+    cta: Format and reading list
     summary: >-
-      Research seminar in which students read, present and discuss recent
-      empirical work in development economics. I supervised student
-      presentations and guided the critical discussion of research designs
-      and results.
+      Year-long research seminar in which pairs of students present a recent
+      paper in development economics and two discussants critique it. As one
+      of the CERDI doctoral tutors, I prepared the presenting and discussing
+      students ahead of their session, working through each paper’s question,
+      contribution, data and identification strategy.
+    credit: >-
+      Course led by Vianney Dequiedt and Èric Roca Fernández (CERDI). The format
+      and reading list below are summarised from their 2025–26 syllabus.
+    extra_facts:
+      - { dt: Format, dd: "15 two-hour sessions over the year · 9 ECTS" }
+    format_title: How a session works
+    format_intro: >-
+      Before each session, the doctoral tutor in charge of the paper holds a
+      one-hour meeting with its presenters and discussants, who have already
+      studied the paper in depth.
+    format:
+      - { time: "30 min", work: "A pair of students — the “authors” — present the paper." }
+      - { time: "15 min", work: "Two discussants critique it, starting with the points that could overturn its conclusions." }
+      - { time: "5–10 min", work: "The authors reply to the discussants." }
+      - { time: "Open", work: "General discussion with the whole class." }
+    reading_list:
+      - title: Introductory sessions
+        papers:
+          - ref: >-
+              Berman, N., Couttenier, M., Rohner, D. and Thoenig, M. (2017). This
+              Mine Is Mine! How Minerals Fuel Conflicts in Africa. American
+              Economic Review 107: 1564–1610.
+            url: https://doi.org/10.1257/aer.20150774
+      - title: Block 1
+        papers:
+          - ref: >-
+              Dalgaard, C.-J., Madsen, J. B. and Strulik, H. (2021). Physiological
+              Constraints and the Transition to Growth: Implications for
+              Comparative Development. Journal of Economic Growth 26: 241–289.
+            url: https://doi.org/10.1007/s10887-021-09193-y
+          - ref: >-
+              Cappelen, A. W., Enke, B. and Tungodden, B. (2025). Universalism:
+              Global Evidence. American Economic Review 115: 43–76.
+            url: https://doi.org/10.1257/aer.20230038
+            replication: https://www.openicpsr.org/openicpsr/project/205581/version/V1/view
+          - ref: >-
+              Josephson, A., Michler, J. D., Kilic, T. and Murray, S. (2026). The
+              Mismeasure of Weather: Using Earth Observation Data for Estimation
+              of Socioeconomic Outcomes. Journal of Development Economics 178:
+              103553.
+            url: https://doi.org/10.1016/j.jdeveco.2025.103553
+          - ref: >-
+              Bhalotra, S. and Clarke, D. (2019). Twin Birth and Maternal
+              Condition. Review of Economics and Statistics 101: 853–864.
+            url: https://doi.org/10.1162/rest_a_00789
+      - title: Block 2
+        papers:
+          - ref: >-
+              Ash, E., Galletta, S. and Giommoni, T. (2025). A Machine Learning
+              Approach to Analyze and Support Anticorruption Policy. American
+              Economic Journal: Economic Policy 17: 162–193.
+            url: https://doi.org/10.1257/pol.20210618
+            replication: https://www.openicpsr.org/openicpsr/project/197821/version/V1/view
+          - ref: >-
+              Beath, A., Christia, F. and Enikolopov, R. (2025). Can Development
+              Programs Counter Insurgencies? Evidence from a Field Experiment in
+              Afghanistan. American Economic Journal: Applied Economics 17:
+              80–116.
+            url: https://doi.org/10.1257/app.20230150
+          - ref: >-
+              Matranga, A. (2024). The Ant and the Grasshopper: Seasonality and the
+              Invention of Agriculture. Quarterly Journal of Economics 139:
+              1467–1504.
+            url: https://doi.org/10.1093/qje/qjae012
+            replication: https://doi.org/10.7910/DVN/WWYKMN
+          - ref: >-
+              Jolevski, F., Nayyar, G., Pleninger, R. and Yu, S. (2025). Spillovers
+              in ICT Adoption from Formal to Informal Firms: Evidence from Zambia.
+              Journal of Development Economics 177: 103549.
+            url: https://doi.org/10.1016/j.jdeveco.2025.103549
+      - title: Block 3
+        papers:
+          - ref: >-
+              Lane, N. (2025). Manufacturing Revolutions: Industrial Policy and
+              Industrialization in South Korea. Quarterly Journal of Economics
+              140: 1683–1741.
+            url: https://doi.org/10.1093/qje/qjaf025
+            replication: https://doi.org/10.7910/DVN/VJECHN
+          - ref: >-
+              Li, R., Song, H., Zhang, J. and Zhang, J. (2025). The Effects of a
+              Multifaceted Poverty Alleviation Program on Rural Income and
+              Household Behavior in China. American Economic Journal: Economic
+              Policy 17: 319–357.
+            url: https://doi.org/10.1257/pol.20210485
+            replication: https://www.openicpsr.org/openicpsr/project/201661/version/V1/view
+          - ref: >-
+              Lee, S., Abay, K. A., Barrett, C. B. and Hoddinott, J. (2026).
+              Estimating Multidimensional Development Resilience. Journal of
+              Development Economics 178: 103583.
+            url: https://doi.org/10.1016/j.jdeveco.2025.103583
+          - ref: >-
+              Zimmermann, L. (2021). The Dynamic Electoral Returns of a Large
+              Antipoverty Program. Review of Economics and Statistics 103:
+              803–817.
+            url: https://doi.org/10.1162/rest_a_00935
+            replication: https://doi.org/10.7910/DVN/KYZ6JR
     sessions: []

@@ -35,8 +35,11 @@ HTML; the teaching pages use the layouts in `_layouts/` and `_includes/`.
 ## Teaching materials
 
 Everything about courses and sessions (titles, guiding question,
-objectives, session plan, applications, file labels) lives in
-`_data/teaching.yml`. Files are listed on the session page automatically:
+overview, objectives, session plan, exercises, readings with DOI and
+replication links, one-line notes on each data file, links to authors'
+replication data that are not hosted here) lives in `_data/teaching.yml`;
+the field list is at the top of that file. Files are listed on the session
+page automatically:
 
 ```
 teaching/econometrics/s01/
@@ -46,7 +49,7 @@ teaching/econometrics/s01/
 ├── code/               # do-files, R scripts
 ├── data/               # replication data
 ├── readings/           # open-access papers only; link others by DOI in teaching.yml
-└── econometrics_s01_materials.zip   # optional one-click package
+└── Goni-Abdoulkadiri_econometrics_s01.zip   # one-click package (built, see below)
 ```
 
 To add a session: create the folder and its `index.html` stub (copy one
@@ -54,16 +57,21 @@ from another session and change `session:`), drop the files into the
 subfolders, and add the session's entry under the course in
 `_data/teaching.yml`.
 
-Never upload solutions: the folders are public.
+Never upload solutions, teacher notes, LaTeX sources (they contain the
+solutions), solution do-files or student lists: the folders are public.
 
 Before publishing a worksheet, stamp it so every page carries the author,
-licence and source URL in its footer and metadata:
+licence and source URL in its footer and metadata, then rebuild the
+session packages (README with citation, licence and sources included):
 
 ```
-pip install pypdf reportlab
-python _tools/stamp_pdfs.py teaching/econometrics/s01/worksheet/*.pdf
+pip install pypdf reportlab pyyaml
+python _tools/stamp_pdfs.py --title "Econometrics, Session 1: worksheet" teaching/econometrics/s01/worksheet/*.pdf
+python _tools/build_packages.py
 ```
 
-Materials are released under CC BY-NC-ND 4.0. Only host files written by
-Ibrahim; documents by others (e.g. a course syllabus) must carry their
-author's name and need their permission.
+Worksheets are released under CC BY-NC-ND 4.0. Only host files written by
+Ibrahim, plus small teaching datasets with their source stated; authors'
+replication files are linked to their official archive (`external_data`).
+Documents by others (e.g. the SED syllabus) are not hosted: the course page
+credits their authors.
