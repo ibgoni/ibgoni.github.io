@@ -1,0 +1,31 @@
+<footer class="site-footer">
+  <div class="inner">
+    <div class="foot-col foot-id">
+      <p class="foot-name">Ibrahim Goni Abdoulkadiri</p>
+      <p class="foot-role">Ph.D. Candidate in Development Economics<br>CERDI &mdash; Université Clermont Auvergne, CNRS, IRD</p>
+    </div>
+    <div class="foot-col">
+      <p class="foot-label">Navigate</p>
+      <ul>
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/research.html' | relative_url }}">Research</a></li>
+        <li><a href="{{ '/teaching.html' | relative_url }}">Teaching</a></li>
+        <li><a href="{{ '/assets/cv/Ibrahim_Goni_CV.pdf' | relative_url }}">CV (PDF)</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <p class="foot-label">Contact</p>
+      <ul>
+        <li><a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/abdoul-kadiri-ibrahim-goni-4287b124a" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/ibgoni" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="inner">
+      <span>&copy; 2026 Ibrahim Goni Abdoulkadiri{% if page.course %} &middot; Teaching materials under <a href="{{ site.data.teaching.license.url }}" target="_blank" rel="noopener license">{{ site.data.teaching.license.name }}</a>{% endif %}</span>
+      <span>Last updated {{ site.time | date: "%B %Y" }}</span>
+    </div>
+  </div>
+</footer>

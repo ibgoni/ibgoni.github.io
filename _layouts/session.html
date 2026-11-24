@@ -1,0 +1,125 @@
+---
+layout: base
+---
+{%- assign T = site.data.teaching -%}
+{%- assign c = T.courses | where: "id", page.course | first -%}
+{%- assign s = c.sessions | where: "id", page.session | first -%}
+{%- assign sbase = c.url | append: s.id | append: "/" -%}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="{{ '/teaching.html' | relative_url }}">Teaching</a><span class="sep" aria-hidden="true">/</span><a href="{{ c.url | relative_url }}">{{ c.title }}</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Session {{ s.number }}</span>
+</nav>
+
+<div class="page-title session-head">
+  <p class="role">Session {{ s.number }} &middot; {{ c.title }} &middot; {{ c.year }}</p>
+  <h1>{{ s.title }}</h1>
+  {%- if s.title_local %}
+  <p class="title-local" lang="fr">{{ s.title_local }}</p>
+  {%- endif %}
+  <p class="byline">By <a href="{{ '/' | relative_url }}">{{ T.author }}</a>{% if s.published %} &middot; First published {{ s.published | date: "%-d %B %Y" }}{% endif %}</p>
+</div>
+
+{%- if s.question %}
+<div class="guiding">
+  <p class="guiding-label">Guiding question</p>
+  <p class="guiding-q" lang="fr">{{ s.question }}</p>
+</div>
+{%- endif %}
+
+{%- if s.applications or s.objectives %}
+<div class="session-intro">
+  {%- if s.objectives %}
+  <div>
+    <h2>Learning objectives</h2>
+    <ul class="objectives" lang="fr">
+      {%- for o in s.objectives %}
+      <li>{{ o }}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+  {%- if s.applications %}
+  <div>
+    <h2>Application</h2>
+    <ul class="applications">
+      {%- for a in s.applications %}
+      <li>{% if a.url %}<a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.ref | default: a.cite }}</a>{% else %}{{ a.ref | default: a.cite }}{% endif %}</li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+</div>
+{%- endif %}
+
+{%- if s.plan %}
+<h2>Session plan</h2>
+<ol class="plan" lang="fr">
+  {%- for step in s.plan %}
+  <li><span class="plan-time">{{ step.time }}</span><span class="plan-work">{{ step.work }}</span></li>
+  {%- endfor %}
+</ol>
+{%- endif %}
+
+{{ content }}
+
+<h2>Materials</h2>
+{%- assign pkg = nil -%}
+{%- assign plen = sbase.size -%}
+{%- for f in site.static_files -%}
+  {%- assign fh = f.path | slice: 0, plen -%}
+  {%- assign frest = f.path | slice: plen, 400 -%}
+  {%- if fh == sbase and f.extname == ".zip" -%}{%- unless frest contains "/" -%}{%- assign pkg = f -%}{%- endunless -%}{%- endif -%}
+{%- endfor -%}
+{%- if pkg %}
+<a class="package" href="{{ pkg.path | relative_url }}" download>
+  <span class="package-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+  </span>
+  <span class="package-text">
+    <span class="package-title">Download the session package</span>
+    <span class="package-sub">All the materials for this session in one archive &middot; {{ pkg.name }}</span>
+  </span>
+</a>
+{%- endif %}
+
+<div class="materials">
+{%- for g in T.groups %}
+{% include materials.html base=sbase dir=g.dir title=g.title labels=s.labels %}
+{%- endfor %}
+</div>
+
+<p class="note solutions-note">Solutions are discussed in class and are not distributed online.</p>
+
+<h2>Using these materials</h2>
+{% include usage.html course=c session=s %}
+
+{%- assign idx = 0 -%}
+{%- for x in c.sessions -%}{%- if x.id == s.id -%}{%- assign idx = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+{%- assign prev_i = idx | minus: 1 -%}
+{%- assign next_i = idx | plus: 1 -%}
+<nav class="pager" aria-label="Sessions">
+  {%- if idx > 0 %}{%- assign p = c.sessions[prev_i] -%}
+  <a class="pager-prev" href="{{ c.url | append: p.id | append: '/' | relative_url }}"><span class="pager-dir">&larr; Session {{ p.number }}</span><span class="pager-title">{{ p.title }}</span></a>
+  {%- else %}<span></span>{% endif %}
+  {%- if next_i < c.sessions.size %}{%- assign n = c.sessions[next_i] -%}
+  <a class="pager-next" href="{{ c.url | append: n.id | append: '/' | relative_url }}"><span class="pager-dir">Session {{ n.number }} &rarr;</span><span class="pager-title">{{ n.title }}</span></a>
+  {%- endif %}
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": {{ s.title | jsonify }},
+  "learningResourceType": "Tutorial worksheet",
+  "url": {{ sbase | absolute_url | jsonify }},
+  "inLanguage": "fr",
+  "educationalLevel": {{ c.programme | jsonify }},
+  {%- if s.published %}
+  "datePublished": {{ s.published | date: "%Y-%m-%d" | jsonify }},
+  {%- endif %}
+  "isPartOf": { "@type": "Course", "name": {{ c.title | jsonify }}, "url": {{ c.url | absolute_url | jsonify }} },
+  "author": { "@type": "Person", "name": {{ T.author | jsonify }}, "url": {{ '/' | absolute_url | jsonify }} },
+  "copyrightHolder": { "@type": "Person", "name": {{ T.author | jsonify }} },
+  "license": {{ T.license.url | jsonify }}
+}
+</script>

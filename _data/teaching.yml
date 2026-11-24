@@ -1,0 +1,77 @@
+# Teaching materials: single source of truth for the Teaching hub,
+# course pages and session pages.
+#
+# Files are listed automatically: drop them into the session folder,
+# e.g. teaching/econometrics/s01/worksheet/, .../data/, .../code/,
+# .../readings/, .../slides/. A .zip at the session root is offered as
+# the one-click session package. Optional `labels` give a file a
+# readable name; otherwise its file name is shown.
+
+author: Ibrahim Goni Abdoulkadiri
+author_cite: Goni Abdoulkadiri, I.
+contact: Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr
+license:
+  name: CC BY-NC-ND 4.0
+  long: Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+  url: https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+groups:
+  - dir: worksheet
+    title: Worksheet
+  - dir: slides
+    title: Slides
+  - dir: code
+    title: Code
+  - dir: data
+    title: Data
+  - dir: readings
+    title: Readings
+
+courses:
+  - id: econometrics
+    url: /teaching/econometrics/
+    title: Econometrics
+    title_local: Économétrie
+    programme: Magistère in Development Economics, 3rd year
+    institution: CERDI — Université Clermont Auvergne
+    year: "2026–27"
+    role: Teaching assistant (tutorials)
+    language: French
+    software: Stata
+    summary: >-
+      Tutorials for the graduate econometrics course of the Magistère. Each
+      session pairs an identification question with a published application
+      and its replication data, from the anatomy of OLS to panel-data and
+      instrumental-variable designs.
+    earlier: "Previously taught at the 1st-year M.Sc. level (2025–26)."
+    sessions: []
+
+  - id: impact-evaluation
+    url: /teaching/impact-evaluation/
+    title: Impact Evaluation
+    programme: 2nd-year M.Sc.
+    institution: Université Clermont Auvergne
+    year: "2026–27"
+    role: Teaching assistant (tutorials)
+    language: French
+    summary: >-
+      Graduate course on the design and econometrics of impact evaluation.
+      The applied sessions take randomized experiments, difference-in-differences,
+      instrumental-variable and regression-discontinuity designs from
+      identification assumptions to implementation on real data.
+    sessions: []
+
+  - id: development-seminar
+    url: /teaching/development-seminar/
+    title: Development Economics Seminar
+    programme: 2nd-year M.Sc.
+    institution: Université Clermont Auvergne
+    year: "2025–26"
+    role: Tutor
+    language: French
+    summary: >-
+      Research seminar in which students read, present and discuss recent
+      empirical work in development economics. I supervised student
+      presentations and guided the critical discussion of research designs
+      and results.
+    sessions: []

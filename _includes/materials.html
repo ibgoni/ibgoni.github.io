@@ -1,0 +1,39 @@
+{%- comment -%}
+  Lists the files directly inside {{ include.base }}{{ include.dir }}/.
+  Params: base (folder URL ending in /), dir, title, labels (optional hash
+  mapping file names to display names).
+{%- endcomment -%}
+{%- assign prefix = include.base | append: include.dir | append: "/" -%}
+{%- assign plen = prefix.size -%}
+{%- capture rows -%}
+{%- for f in site.static_files -%}
+  {%- assign head = f.path | slice: 0, plen -%}
+  {%- if head == prefix -%}
+    {%- assign rest = f.path | slice: plen, 400 -%}
+    {%- unless rest contains "/" or f.name == ".gitkeep" -%}
+      {%- assign ext = f.extname | downcase -%}
+      {%- case ext -%}
+        {%- when ".pdf" -%}{%- assign kind = "PDF" -%}
+        {%- when ".dta" -%}{%- assign kind = "DTA" -%}
+        {%- when ".csv" -%}{%- assign kind = "CSV" -%}
+        {%- when ".xlsx", ".xls" -%}{%- assign kind = "XLSX" -%}
+        {%- when ".do" -%}{%- assign kind = "DO" -%}
+        {%- when ".r", ".rmd", ".qmd" -%}{%- assign kind = "R" -%}
+        {%- when ".zip" -%}{%- assign kind = "ZIP" -%}
+        {%- when ".html" -%}{%- assign kind = "HTML" -%}
+        {%- else -%}{%- assign kind = ext | remove: "." | upcase -%}
+      {%- endcase -%}
+      {%- assign label = f.name -%}
+      {%- if include.labels and include.labels[f.name] -%}{%- assign label = include.labels[f.name] -%}{%- endif -%}
+      <li><a class="file" href="{{ f.path | relative_url }}"{% if ext == ".pdf" or ext == ".html" %} target="_blank" rel="noopener"{% else %} download{% endif %}><span class="ftype ftype-{{ kind | downcase }}">{{ kind }}</span><span class="fname">{{ label }}</span><span class="fact" aria-hidden="true">{% if ext == ".pdf" or ext == ".html" %}Open{% else %}Download{% endif %}</span></a></li>
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- endcapture -%}
+{%- assign rows_s = rows | strip -%}
+{%- if rows_s != "" %}
+<div class="mat-group">
+  <h3>{{ include.title }}</h3>
+  <ul class="files">{{ rows_s }}</ul>
+</div>
+{%- endif -%}
