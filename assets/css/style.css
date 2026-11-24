@@ -10,7 +10,7 @@
   --card: #ffffff;
   --ink: #191c20;
   --muted: #565e68;
-  --faint: #838b95;
+  --faint: #6b737d;
   --navy: #003262;
   --navy-bright: #0d5aa3;
   --navy-deep: #04264d;
@@ -631,6 +631,7 @@ details.abstract .abstract-body p:last-child { margin-bottom: 0; }
 .highlight-title { font-family: var(--display); font-size: 1.125rem; line-height: 1.4; }
 .highlight-title a { font-weight: 600; color: var(--ink); }
 .highlight-title a:hover { color: var(--navy); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 0.2em; }
+.highlight .highlight-note { margin-top: 0.4rem; font-size: 0.9688rem; line-height: 1.55; color: var(--muted); }
 .highlight .highlight-links { margin-top: 0.45rem; font-family: var(--sans); font-size: 0.875rem; }
 .highlight-links span { color: var(--faint); margin: 0 0.35rem; }
 
@@ -1044,8 +1045,8 @@ details.abstract .abstract-body p:last-child { margin-bottom: 0; }
 
 .session-intro {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 0 2.5rem;
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
 .objectives, .applications { list-style: none; }
@@ -1126,6 +1127,7 @@ details.abstract .abstract-body p:last-child { margin-bottom: 0; }
 .session-intro.is-single { grid-template-columns: 1fr; }
 
 .applications li { padding-left: 1.5rem; margin-bottom: 0.9rem; }
+.session-intro > div + div { margin-top: 0.4rem; }
 
 .app-role {
   display: block;
@@ -1537,9 +1539,12 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
 @media (max-width: 700px) {
   main { padding: 2.5rem 1.25rem 3.25rem; }
 
-  .home-intro { flex-direction: column-reverse; gap: 2.75rem; }
+  .home-intro { flex-direction: column; gap: 0; }
+  .home-side { display: contents; }
+  .home-photo { order: 1; }
+  .home-text { order: 2; }
+  .side-facts { order: 3; margin-top: 2.2rem; }
 
-  .home-side { width: 100%; }
   .home-photo { width: 184px; margin: 0.5rem 0.9rem 0.9rem 0; }
   .side-facts { max-width: 22rem; }
 
@@ -1648,5 +1653,7 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   main { max-width: none; padding: 0; }
   details.abstract { display: none; }
   .paper, .course-card, .session-card a { border: none; box-shadow: none; padding: 0; margin-bottom: 1.5rem; }
-  .copy-btn, .pager { display: none; }
+  .copy-btn, .pager, .theme-toggle, .skip-link, .news-more summary { display: none; }
+  .news-more > .news-list { display: block; }
+  a { color: inherit; text-decoration: none; }
 }

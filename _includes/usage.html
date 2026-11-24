@@ -17,7 +17,7 @@
 <div class="usage">
   <div class="usage-block">
     <p class="usage-label">How to cite</p>
-    <p class="cite-text" id="cite-text">{{ T.author_cite }} ({{ uyear }}). <em>{{ utitle }}</em>. {{ uc.title }}, {{ uc.programme }}, {{ uc.institution }}. {{ uurl }}</p>
+    <p class="cite-text" id="cite-text">{{ T.author_cite }} ({{ uyear }}). <em>{{ utitle }}</em>. {{ uc.title }}, {{ uc.programme }}, {{ uc.institution }}. {{ uurl | replace: "/", "/<wbr>" }}</p>
     <button class="copy-btn" type="button" data-copy="cite-text">Copy citation</button>
   </div>
   <div class="usage-block">
