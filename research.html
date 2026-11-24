@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research | Ibrahim Goni Abdoulkadiri</title>
-  <meta name="description" content="Working papers and research in progress by Ibrahim Goni Abdoulkadiri: broadband internet and local development in Africa, submarine cable disruptions and online labor markets, and willingness-to-pay elicitation.">
-  <meta name="author" content="Ibrahim Goni Abdoulkadiri">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ibgoni.github.io/research.html">
-
-  <meta property="og:title" content="Research | Ibrahim Goni Abdoulkadiri">
-  <meta property="og:description" content="Working papers and research in progress on digital infrastructure and economic development in Sub-Saharan Africa.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ibgoni.github.io/research.html">
-
-  <meta name="theme-color" content="#003262" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#12161d" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=7">
-</head>
-<body>
-
-<header class="site-header">
-  <div class="inner">
-    <a class="site-name" href="index.html">Ibrahim Goni</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html" aria-current="page">Research</a></li>
-        <li><a href="teaching.html">Teaching</a></li>
-        <li><a href="assets/cv/Ibrahim_Goni_CV.pdf">CV</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main>
+---
+layout: base
+nav: research
+title: Research
+description: "Working papers and research in progress by Ibrahim Goni Abdoulkadiri: submarine cables and local development in Africa, power outages and digital payments in Brazil, submarine cable disruptions and online labor markets, and willingness-to-pay elicitation."
+---
   <div class="page-title">
     <h1>Research</h1>
   </div>
@@ -47,11 +12,12 @@
     <h2>Working Papers</h2>
 
     <article class="paper" id="wired-for-growth">
-      <h3><a href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">Wired for Growth? Broadband Internet and Local Development in Africa</a></h3>
-      <p class="paper-status">Draft available</p>
+      <h3><a href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</a></h3>
+      <p class="paper-status">Draft available &middot; October 2026</p>
       <div class="paper-links">
         <a class="doc-link" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">Draft (PDF)</a>
       </div>
+      {% include presented-at.html paper="wired" %}
       <details class="abstract">
         <summary>Abstract</summary>
         <div class="abstract-body">
@@ -78,6 +44,29 @@
 
   <section>
     <h2>Work in Progress</h2>
+
+    <article class="paper" id="power-outages">
+      <h3>Power Outages and Digital Payments: Evidence from Brazil</h3>
+      <p class="paper-status">Draft in preparation</p>
+      <details class="abstract">
+        <summary>Abstract</summary>
+        <div class="abstract-body">
+          <p>
+            Digital payments depend on electricity, whose supply fails routinely
+            in many low- and middle-income countries. This paper studies how such
+            outages affect payments through Pix, Brazil&rsquo;s instant payment
+            system. Using administrative records of power interruptions and
+            comparing neighboring municipalities from one month to the next, it
+            shows that each unplanned hour without power per consumer keeps a
+            fifth to a third of an average hour&rsquo;s payments out of Pix. These
+            payments are not fully made up through Pix within three months.
+            Interruptions mainly reduce how often individuals pay, and much less
+            the number who do. Poorer municipalities lose the most hours of
+            electricity and the largest share of their payments.
+          </p>
+        </div>
+      </details>
+    </article>
 
     <article class="paper">
       <h3>Collusion in Willingness to Pay Elicitation Mechanisms</h3>
@@ -173,68 +162,6 @@
   </section>
 
   <section>
-    <h2>Seminars &amp; Conferences</h2>
-    <ul class="dated-list">
-      <li>
-        <span class="year">2026</span>
-        <span class="what">
-          6th International Conference on Development Economics (ICDE), French Association of Development Economics (AFEDEV), Rouen, France<br>
-          The West African Digital Transformations Forum, Cotonou, Benin
-        </span>
-      </li>
-      <li>
-        <span class="year">2025</span>
-        <span class="what">CERDI Internal Seminar, Université Clermont Auvergne</span>
-      </li>
-    </ul>
+    <h2>Presentations</h2>
+    {% include talks.html %}
   </section>
-</main>
-
-<footer class="site-footer">
-  <div class="inner">
-    <div class="foot-col foot-id">
-      <p class="foot-name">Ibrahim Goni Abdoulkadiri</p>
-      <p class="foot-role">Ph.D. Candidate in Development Economics<br>CERDI &mdash; Université Clermont Auvergne, CNRS, IRD</p>
-    </div>
-    <div class="foot-col">
-      <p class="foot-label">Navigate</p>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="teaching.html">Teaching</a></li>
-        <li><a href="assets/cv/Ibrahim_Goni_CV.pdf">CV (PDF)</a></li>
-      </ul>
-    </div>
-    <div class="foot-col">
-      <p class="foot-label">Contact</p>
-      <ul>
-        <li><a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Email</a></li>
-        <li><a href="https://www.linkedin.com/in/abdoul-kadiri-ibrahim-goni-4287b124a" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/ibgoni" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <div class="inner">
-      <span>&copy; 2026 Ibrahim Goni Abdoulkadiri</span>
-      <span>Last updated October 2026</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-  (function () {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var els = document.querySelectorAll('.paper, .course');
-    if (!('IntersectionObserver' in window)) return;
-    els.forEach(function (el) { el.classList.add('will-reveal'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.08 });
-    els.forEach(function (el) { io.observe(el); });
-  })();
-</script>
-</body>
-</html>

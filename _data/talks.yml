@@ -1,0 +1,61 @@
+# Presentations, newest first. Feeds the Research page (by year) and the
+# "Presented at" line under each paper.
+#
+#   date       first day (YYYY-MM-DD); with precision: month or year when
+#              the exact day is not known
+#   end        last day, for multi-day events (optional)
+#   event      name of the conference or seminar
+#   short      compact name used under the paper (optional)
+#   host       organiser (optional)
+#   place      city, country
+#   paper      id of the paper presented (wired, pix, cables, ...)
+#   role       "Presenter and discussant", "Discussant", ... (optional)
+#   url        event page (optional)
+#
+# Events still to come are flagged "Upcoming" automatically in the browser.
+
+- date: 2027-03-21
+  end: 2027-03-23
+  event: "CSAE Conference 2027: Economic Development in Africa"
+  short: CSAE Conference 2027, Oxford
+  host: University of Oxford
+  place: Oxford, United Kingdom
+  paper: wired
+  url: https://csae.web.ox.ac.uk/csae-conference-2027
+
+- date: 2027-01-28
+  end: 2027-01-29
+  event: Kiel–CEPR–World Bank African Economic Development Conference
+  short: Kiel–CEPR–World Bank AEDC 2027, Rome
+  host: Kiel Institute for the World Economy
+  place: Rome, Italy
+  paper: wired
+
+- date: 2026-11-01
+  precision: month
+  event: CERDI Internal Seminar
+  host: Université Clermont Auvergne
+  place: Clermont-Ferrand, France
+
+- date: 2026-07-08
+  event: West African Digital Transformations Forum, research workshop
+  short: West African Digital Transformations Forum 2026, Cotonou
+  place: Cotonou, Benin
+  paper: wired
+  role: Presenter and discussant
+
+- date: 2026-07-02
+  precision: month
+  event: 6th International Conference on Development Economics (ICDE)
+  short: ICDE 2026, Rouen
+  host: French Association of Development Economics (AFEDEV)
+  place: Rouen, France
+  paper: wired
+
+- date: 2025-01-01
+  precision: year
+  event: CERDI Internal Seminar
+  short: CERDI Internal Seminar 2025
+  host: Université Clermont Auvergne
+  place: Clermont-Ferrand, France
+  paper: wired

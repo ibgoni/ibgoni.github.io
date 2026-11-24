@@ -1,0 +1,13 @@
+{%- assign n = include.n -%}
+{%- if n.precision == "year" -%}
+  {%- assign dlabel = n.date | date: "%Y" -%}
+{%- else -%}
+  {%- assign dlabel = n.date | date: "%b %Y" -%}
+{%- endif -%}
+<li class="news-item" data-date="{{ n.date | date: '%Y-%m-%d' }}"{% if n.end %} data-end="{{ n.end | date: '%Y-%m-%d' }}"{% endif %}>
+    <time class="news-date" datetime="{{ n.date | date: '%Y-%m-%d' }}">{{ dlabel }}</time>
+    <div class="news-body">
+      <p class="news-tags"><span class="news-kind kind-{{ n.kind | downcase }}">{{ n.kind }}</span><span class="news-upcoming">Upcoming</span></p>
+      <p class="news-text">{{ n.text }}</p>
+    </div>
+  </li>

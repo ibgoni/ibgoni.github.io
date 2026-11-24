@@ -1,0 +1,31 @@
+{%- comment -%} Presentations from _data/talks.yml, grouped by year. {%- endcomment -%}
+{%- assign years = site.data.talks | group_by_exp: "t", "t.date | date: '%Y'" -%}
+<div class="talks">
+{%- for y in years %}
+  <div class="talk-year">
+    <h3 class="talk-year-label">{{ y.name }}</h3>
+    <ul class="talk-list">
+      {%- for t in y.items %}
+      {%- if t.precision == "year" -%}
+        {%- assign when = "" -%}
+      {%- elsif t.precision == "month" -%}
+        {%- assign when = t.date | date: "%B %Y" -%}
+      {%- elsif t.end -%}
+        {%- assign m1 = t.date | date: "%m" -%}{%- assign m2 = t.end | date: "%m" -%}
+        {%- if m1 == m2 -%}
+          {%- capture when -%}{{ t.date | date: "%-d" }}–{{ t.end | date: "%-d %B %Y" }}{%- endcapture -%}
+        {%- else -%}
+          {%- capture when -%}{{ t.date | date: "%-d %B" }} – {{ t.end | date: "%-d %B %Y" }}{%- endcapture -%}
+        {%- endif -%}
+      {%- else -%}
+        {%- assign when = t.date | date: "%-d %B %Y" -%}
+      {%- endif %}
+      <li class="talk" data-date="{{ t.date | date: '%Y-%m-%d' }}"{% if t.end %} data-end="{{ t.end | date: '%Y-%m-%d' }}"{% endif %}>
+        <span class="talk-event">{% if t.url %}<a href="{{ t.url }}" target="_blank" rel="noopener">{{ t.event }}</a>{% else %}{{ t.event }}{% endif %}<span class="news-upcoming">Upcoming</span></span>
+        <span class="talk-meta">{% if t.host %}{{ t.host }} &middot; {% endif %}{{ t.place }}{% if when != "" %} &middot; {{ when }}{% endif %}{% if t.role %} &middot; <em>{{ t.role }}</em>{% endif %}</span>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+{%- endfor %}
+</div>

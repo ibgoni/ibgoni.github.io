@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 <head>
 {% include head.html %}
 </head>
@@ -7,7 +7,7 @@
 
 {% include header.html %}
 
-<main>
+<main id="main">
 {{ content }}
 </main>
 
@@ -15,6 +15,45 @@
 
 <script>
   (function () {
+    var root = document.documentElement;
+
+    /* Theme toggle: remembers the visitor's choice; otherwise follows the system. */
+    var toggle = document.querySelector('.theme-toggle');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    function stored() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#12161d' : '#003262');
+      if (toggle) {
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      }
+    }
+    apply(root.getAttribute('data-theme') || 'light');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.classList.add('theme-anim');
+        apply(next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        setTimeout(function () { root.classList.remove('theme-anim'); }, 350);
+      });
+    }
+    if (window.matchMedia) {
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      var onChange = function (e) { if (!stored()) apply(e.matches ? 'dark' : 'light'); };
+      if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+    }
+
+    /* Dated items (news, talks): mark those still to come, at viewing time. */
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    document.querySelectorAll('[data-date]').forEach(function (el) {
+      var p = (el.getAttribute('data-date') || '').split('-');
+      var start = new Date(+p[0], (+p[1] || 1) - 1, +p[2] || 1);   /* local date, no time-zone shift */
+      if (!isNaN(start) && start > today) el.classList.add('is-upcoming');
+    });
+
+    /* Copy-to-clipboard buttons (citations). */
     document.querySelectorAll('[data-copy]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var el = document.getElementById(btn.getAttribute('data-copy'));
@@ -28,7 +67,8 @@
       });
     });
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    /* Gentle reveal of cards on scroll. */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!('IntersectionObserver' in window)) return;
     var els = document.querySelectorAll('.paper, .course, .course-card, .session-card, .mat-group');
     els.forEach(function (el) { el.classList.add('will-reveal'); });
