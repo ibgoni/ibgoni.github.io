@@ -1,0 +1,139 @@
+---
+layout: base
+---
+{%- assign T = site.data.teaching -%}
+{%- assign c = T.courses | where: "id", page.course | first -%}
+{%- if c.materials == false -%}{%- assign own = false -%}{%- else -%}{%- assign own = true -%}{%- endif -%}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="{{ '/teaching.html' | relative_url }}">Teaching</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">{{ c.title }}</span>
+</nav>
+
+<div class="page-title course-head">
+  <p class="role">{{ c.programme }} &middot; {{ c.year }}</p>
+  <h1>{{ c.title }}</h1>
+  {%- if c.title_local %}
+  <p class="title-local" lang="fr">{{ c.title_local }}</p>
+  {%- endif %}
+</div>
+
+<p class="lede">{{ c.summary }}</p>
+
+<dl class="course-facts">
+  <div><dt>Programme</dt><dd>{{ c.programme }}</dd></div>
+  <div><dt>Institution</dt><dd>{{ c.institution }}</dd></div>
+  <div><dt>Academic year</dt><dd>{{ c.year }}</dd></div>
+  <div><dt>My role</dt><dd>{{ c.role }}</dd></div>
+  {%- if c.language %}<div><dt>Language</dt><dd>{{ c.language }}</dd></div>{% endif %}
+  {%- if c.software %}<div><dt>Software</dt><dd>{{ c.software }}</dd></div>{% endif %}
+  {%- for x in c.extra_facts %}<div><dt>{{ x.dt }}</dt><dd>{{ x.dd }}</dd></div>{% endfor %}
+</dl>
+{%- if c.credit %}
+<p class="note course-credit">{{ c.credit }}</p>
+{%- endif %}
+{%- if c.earlier %}
+<p class="note">{{ c.earlier }}</p>
+{%- endif %}
+
+{{ content }}
+
+{%- capture course_docs -%}
+{% include materials.html base=c.url dir="syllabus" title="Syllabus" %}
+{% include materials.html base=c.url dir="resources" title="Course resources" %}
+{%- endcapture -%}
+{%- assign course_docs_s = course_docs | strip -%}
+{%- if course_docs_s != "" %}
+<h2>Course documents</h2>
+{{ course_docs_s }}
+{%- endif %}
+
+{%- if c.sessions.size > 0 %}
+<h2>Sessions</h2>
+<ol class="session-grid">
+  {%- for s in c.sessions %}
+  {%- assign sbase = c.url | append: s.id | append: "/" -%}
+  <li class="session-card">
+    <a href="{{ sbase | relative_url }}">
+      <span class="s-num">{{ s.number }}</span>
+      <span class="s-body">
+        <span class="s-title">{{ s.title }}</span>
+        {%- if s.question %}
+        <span class="s-q" lang="fr">{{ s.question }}</span>
+        {%- endif %}
+        {%- if s.applications %}
+        <span class="s-app">{% assign shown = 0 %}{% for a in s.applications %}{% if a.role != "Method" %}{% if shown > 0 %} &middot; {% endif %}{{ a.cite }}{% assign shown = shown | plus: 1 %}{% endif %}{% endfor %}</span>
+        {%- endif %}
+        <span class="s-kinds">
+          {%- for g in T.groups -%}
+            {%- assign gp = sbase | append: g.dir | append: "/" -%}
+            {%- assign gl = gp.size -%}
+            {%- for f in site.static_files -%}
+              {%- assign fh = f.path | slice: 0, gl -%}
+              {%- if fh == gp and f.name != ".gitkeep" %}<span class="kind">{{ g.title }}</span>{% break %}{%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </span>
+      </span>
+      <span class="s-go" aria-hidden="true">&rarr;</span>
+    </a>
+  </li>
+  {%- endfor %}
+</ol>
+{%- elsif course_docs_s == "" and own %}
+<h2>Sessions</h2>
+<p class="empty-state">Session materials are published here one session at a time.</p>
+{%- endif %}
+
+{%- if c.format %}
+<h2>{{ c.format_title | default: "How a session works" }}</h2>
+{%- if c.format_intro %}
+<p>{{ c.format_intro }}</p>
+{%- endif %}
+<ol class="plan">
+  {%- for step in c.format %}
+  <li><span class="plan-time">{{ step.time }}</span><span class="plan-work">{{ step.work }}</span></li>
+  {%- endfor %}
+</ol>
+{%- endif %}
+
+{%- if c.reading_list %}
+<h2>Reading list, {{ c.year }}</h2>
+{%- for block in c.reading_list %}
+<div class="reading-block">
+  <h3>{{ block.title }}</h3>
+  <ul class="readings">
+    {%- for r in block.papers %}
+    <li><a class="app-ref" href="{{ r.url }}" target="_blank" rel="noopener">{{ r.ref }}</a>{% if r.replication %}<a class="app-rep" href="{{ r.replication }}" target="_blank" rel="noopener">Replication files</a>{% endif %}</li>
+    {%- endfor %}
+  </ul>
+</div>
+{%- endfor %}
+{%- endif %}
+
+{%- if c.complement %}
+<p class="note course-complement">{{ c.complement }}</p>
+{%- endif %}
+
+{%- if own %}
+<h2>Using these materials</h2>
+{% include usage.html course=c %}
+{%- endif %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": {{ c.title | jsonify }},
+  {%- if c.title_local %}
+  "alternateName": {{ c.title_local | jsonify }},
+  {%- endif %}
+  "description": {{ c.summary | jsonify }},
+  "url": {{ c.url | absolute_url | jsonify }},
+  "inLanguage": "fr",
+  "educationalLevel": {{ c.programme | jsonify }},
+  "provider": { "@type": "CollegeOrUniversity", "name": {{ c.institution | jsonify }} }
+  {%- if own %},
+  "author": { "@type": "Person", "name": {{ T.author | jsonify }}, "url": {{ '/' | absolute_url | jsonify }} },
+  "license": {{ T.license.url | jsonify }}
+  {%- endif %}
+}
+</script>

@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -14,9 +17,9 @@
   </url>
   <url>
     <loc>https://ibgoni.github.io/teaching.html</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ibgoni.github.io/assets/cv/Ibrahim_Goni_CV.pdf</loc>
@@ -24,4 +27,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+{%- for c in site.data.teaching.courses %}
+  <url>
+    <loc>{{ c.url | absolute_url }}</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+{%- for s in c.sessions %}
+{%- assign sbase = c.url | append: s.id | append: "/" %}
+  <url>
+    <loc>{{ sbase | absolute_url }}</loc>
+    <lastmod>{{ s.published | date: "%Y-%m-%d" | default: "2026-11-24" }}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+{%- assign wbase = sbase | append: "worksheet/" -%}
+{%- assign wl = wbase.size -%}
+{%- for f in site.static_files -%}
+{%- assign fh = f.path | slice: 0, wl -%}
+{%- if fh == wbase and f.extname == ".pdf" %}
+  <url>
+    <loc>{{ f.path | absolute_url }}</loc>
+    <lastmod>{{ s.published | date: "%Y-%m-%d" | default: "2026-11-24" }}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+{%- endif -%}
+{%- endfor %}
+{%- endfor %}
+{%- endfor %}
 </urlset>

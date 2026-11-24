@@ -1,0 +1,27 @@
+{%- comment -%}
+  Citation + licence block. Params: course (course hash), session (optional
+  session hash).
+{%- endcomment -%}
+{%- assign T = site.data.teaching -%}
+{%- assign uc = include.course -%}
+{%- assign us = include.session -%}
+{%- if us -%}
+  {%- assign uyear = us.published | date: "%Y" | default: "2026" -%}
+  {%- capture utitle -%}Session {{ us.number }}: {{ us.title }}{%- endcapture -%}
+  {%- capture uurl -%}{{ uc.url | append: us.id | append: "/" | absolute_url }}{%- endcapture -%}
+{%- else -%}
+  {%- assign uyear = uc.year | slice: 0, 4 -%}
+  {%- capture utitle -%}{{ uc.title }}: tutorial materials{%- endcapture -%}
+  {%- capture uurl -%}{{ uc.url | absolute_url }}{%- endcapture -%}
+{%- endif -%}
+<div class="usage">
+  <div class="usage-block">
+    <p class="usage-label">How to cite</p>
+    <p class="cite-text" id="cite-text">{{ T.author_cite }} ({{ uyear }}). <em>{{ utitle }}</em>. {{ uc.title }}, {{ uc.programme }}, {{ uc.institution }}. {{ uurl }}</p>
+    <button class="copy-btn" type="button" data-copy="cite-text">Copy citation</button>
+  </div>
+  <div class="usage-block">
+    <p class="usage-label">Licence</p>
+    <p>&copy; {{ uyear }} {{ T.author }}. Released under <a href="{{ T.license.url }}" target="_blank" rel="noopener license">{{ T.license.long }}</a>: you may share these materials for non-commercial purposes, with attribution and without modification. Instructors who would like to adapt them are welcome to <a href="mailto:{{ T.contact }}">get in touch</a>. Replication datasets remain subject to the terms set by their original authors.</p>
+  </div>
+</div>
