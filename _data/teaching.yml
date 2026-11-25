@@ -44,7 +44,7 @@ courses:
     title: Econometrics
     title_local: Économétrie
     programme: Magistère in Development Economics, 3rd year
-    institution: CERDI — Université Clermont Auvergne
+    institution: School of Economics — Université Clermont Auvergne
     year: "2026–27"
     role: Teaching assistant (tutorials)
     language: French
@@ -361,7 +361,7 @@ courses:
     title: Impact Evaluation
     title_local: Évaluation d’impact
     programme: Magistère in Development Economics, 3rd year
-    institution: CERDI — Université Clermont Auvergne
+    institution: School of Economics — Université Clermont Auvergne
     year: "2026–27"
     role: Teaching assistant (tutorials)
     language: French
@@ -697,8 +697,8 @@ courses:
     url: /teaching/development-seminar/
     title: Development Economics Seminar
     title_local: Séminaire d’Économie du Développement (SED)
-    programme: Master 2 in Economic Analysis
-    institution: CERDI — Université Clermont Auvergne
+    programme: M.Sc. in Development Economics, 2nd year (Economic Analysis track)
+    institution: School of Economics — Université Clermont Auvergne
     year: "2025–26"
     role: Doctoral tutor
     language: French
