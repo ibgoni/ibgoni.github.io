@@ -53,6 +53,26 @@
       if (!isNaN(start) && start > today) el.classList.add('is-upcoming');
     });
 
+    /* Paper buttons (Abstract, Cite): open and close their panel; a link to
+       a panel id (e.g. research.html#wired-for-growth-abstract) opens it. */
+    document.querySelectorAll('[data-panel]').forEach(function (btn) {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.classList.toggle('is-open', open);
+      });
+    });
+    function openFromHash() {
+      var id = decodeURIComponent(location.hash.slice(1));
+      if (!id) return;
+      var b = document.querySelector('[data-panel][aria-controls="' + id + '"]');
+      if (b && b.getAttribute('aria-expanded') !== 'true') b.click();
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
     /* Copy-to-clipboard buttons (citations). */
     document.querySelectorAll('[data-copy]').forEach(function (btn) {
       btn.addEventListener('click', function () {
