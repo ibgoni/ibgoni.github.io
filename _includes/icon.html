@@ -1,7 +1,9 @@
-{%- comment -%} Small inline icons for buttons. Param: name (pdf, chevron, quote, arrow). {%- endcomment -%}
+{%- comment -%} Small inline icons for buttons. Param: name (pdf, chevron, quote, arrow, download, down). {%- endcomment -%}
 {%- case include.name -%}
 {%- when "pdf" -%}<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z"/><path d="M14 2.5V8h5.5"/><path d="M8.5 13h7M8.5 17h5"/></svg>
 {%- when "chevron" -%}<svg class="ic ic-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
 {%- when "quote" -%}<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.6 6.2C6.4 7.5 4.5 10 4.5 13.6v4.2h5.6v-5.6H7.4c.1-2 1.2-3.4 3.1-4.3zm9.4 0c-3.2 1.3-5.1 3.8-5.1 7.4v4.2h5.6v-5.6h-2.7c.1-2 1.2-3.4 3.1-4.3z"/></svg>
 {%- when "arrow" -%}<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+{%- when "download" -%}<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+{%- when "down" -%}<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
 {%- endcase -%}

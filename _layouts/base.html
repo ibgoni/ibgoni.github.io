@@ -45,6 +45,16 @@
       if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
     }
 
+    /* Small screens: the header slides away while reading down and comes back
+       as soon as the reader scrolls up (CSS limits the effect to phones). */
+    var hdr = document.querySelector('.site-header'), lastY = window.scrollY;
+    if (hdr) window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) return;
+      hdr.classList.toggle('is-hidden', y > lastY && y > 160);
+      lastY = y;
+    }, { passive: true });
+
     /* Dated items (news, talks): mark those still to come, at viewing time. */
     var today = new Date(); today.setHours(0, 0, 0, 0);
     document.querySelectorAll('[data-date]').forEach(function (el) {

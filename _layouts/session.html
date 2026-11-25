@@ -5,6 +5,16 @@ layout: base
 {%- assign c = T.courses | where: "id", page.course | first -%}
 {%- assign s = c.sessions | where: "id", page.session | first -%}
 {%- assign sbase = c.url | append: s.id | append: "/" -%}
+{%- assign pkg = nil -%}{%- assign wsheet = nil -%}
+{%- assign plen = sbase.size -%}
+{%- assign wprefix = sbase | append: "worksheet/" -%}{%- assign wlen = wprefix.size -%}
+{%- for f in site.static_files -%}
+  {%- assign fh = f.path | slice: 0, plen -%}
+  {%- assign frest = f.path | slice: plen, 400 -%}
+  {%- if fh == sbase and f.extname == ".zip" -%}{%- unless frest contains "/" -%}{%- assign pkg = f -%}{%- endunless -%}{%- endif -%}
+  {%- assign wh = f.path | slice: 0, wlen -%}
+  {%- if wh == wprefix and f.extname == ".pdf" and wsheet == nil -%}{%- assign wsheet = f -%}{%- endif -%}
+{%- endfor -%}
 <nav class="crumbs" aria-label="Breadcrumb">
   <a href="{{ '/teaching.html' | relative_url }}">Teaching</a><span class="sep" aria-hidden="true">/</span><a href="{{ c.url | relative_url }}">{{ c.title }}</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Session {{ s.number }}</span>
 </nav>
@@ -17,6 +27,18 @@ layout: base
   {%- endif %}
   <p class="byline">By <a href="{{ '/' | relative_url }}">{{ T.author }}</a>{% if s.created %} &middot; Written {{ s.created | date: "%B %Y" }}{% endif %}{% if s.published %} &middot; Published online {{ s.published | date: "%-d %B %Y" }}{% endif %}</p>
 </div>
+
+{%- if wsheet or pkg %}
+<div class="paper-actions session-actions">
+  {%- if wsheet %}
+  <a class="pbtn pbtn-primary" href="{{ wsheet.path | relative_url }}" target="_blank" rel="noopener">{% include icon.html name="pdf" %}Worksheet (PDF)</a>
+  {%- endif %}
+  {%- if pkg %}
+  <a class="pbtn" href="{{ pkg.path | relative_url }}" download>{% include icon.html name="download" %}Session package (.zip)</a>
+  {%- endif %}
+  <a class="pbtn" href="#materials">{% include icon.html name="down" %}All materials</a>
+</div>
+{%- endif %}
 
 {%- if s.question %}
 <div class="guiding">
@@ -86,13 +108,6 @@ layout: base
 {{ content }}
 
 <h2 id="materials">Materials</h2>
-{%- assign pkg = nil -%}
-{%- assign plen = sbase.size -%}
-{%- for f in site.static_files -%}
-  {%- assign fh = f.path | slice: 0, plen -%}
-  {%- assign frest = f.path | slice: plen, 400 -%}
-  {%- if fh == sbase and f.extname == ".zip" -%}{%- unless frest contains "/" -%}{%- assign pkg = f -%}{%- endunless -%}{%- endif -%}
-{%- endfor -%}
 {%- if pkg %}
 <a class="package" href="{{ pkg.path | relative_url }}" download>
   <span class="package-icon" aria-hidden="true">

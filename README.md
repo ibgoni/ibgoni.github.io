@@ -35,6 +35,9 @@ components in `_includes/`.
   tags.
 - **Light/dark theme**: visitors switch with the button in the header;
   the choice is remembered, otherwise the system setting is used.
+- **Fonts**: Fraunces (titles), Source Serif 4 (text) and Source Sans 3
+  (labels) are served from `assets/fonts/` as variable fonts under the SIL
+  Open Font License; no request goes to Google Fonts.
 - **CV**: edit `assets/cv/cv-source.html` (Harvard-style layout, EB Garamond
   in `assets/cv/fonts/`), open it in Chrome, print to PDF (A4, default
   margins, no browser headers/footers, background graphics on) and replace
