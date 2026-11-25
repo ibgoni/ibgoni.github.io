@@ -44,6 +44,8 @@
 
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+  :root { --accent: #1f3a68; }
+
   body {
     font-family: "EB Garamond", Garamond, "Times New Roman", serif;
     font-size: 10.5pt;
@@ -62,10 +64,17 @@
 
   /* ------------------------------------------------------------- header */
   header { text-align: center; margin-bottom: 9pt; }
-  .name { font-size: 20pt; font-weight: 600; letter-spacing: 0.04em; font-variant: small-caps; line-height: 1.1; }
+  .name { font-size: 21pt; font-weight: 600; letter-spacing: 0.05em; font-variant: small-caps; line-height: 1.1; color: var(--accent); }
   .subtitle { font-size: 11.5pt; font-style: italic; margin-top: 1pt; }
-  .contact { font-size: 10pt; margin-top: 4pt; line-height: 1.35; }
-  .contact .sep { margin: 0 5pt; color: #888; }
+  .contact-grid {
+    display: flex; justify-content: space-between; gap: 18pt;
+    margin-top: 7pt; padding-top: 5pt;
+    border-top: 0.8pt solid var(--accent);
+    font-size: 9.8pt; line-height: 1.38; text-align: left;
+  }
+  .c-right { text-align: right; }
+  .c-sub { font-style: italic; color: #333; }
+  .contact-grid .sep { margin: 0 5pt; color: #888; }
 
   /* ----------------------------------------------------------- sections */
   h2 {
@@ -73,9 +82,10 @@
     font-weight: 700;
     font-variant: small-caps;
     letter-spacing: 0.07em;
-    border-bottom: 0.6pt solid #111;
+    color: var(--accent);
+    border-bottom: 0.6pt solid var(--accent);
     padding-bottom: 1pt;
-    margin: 9pt 0 3.5pt;
+    margin: 8.5pt 0 3.5pt;
     break-after: avoid;
   }
 
@@ -98,7 +108,9 @@
 
   .paper { margin-bottom: 4pt; break-inside: avoid; }
   .paper-title { font-weight: 600; }
+  a.paper-title { color: #111; text-decoration: underline; text-decoration-color: #9aa7bd; text-decoration-thickness: 0.5pt; text-underline-offset: 2pt; }
   .paper .meta { font-size: 10pt; }
+  .paper .status { font-style: italic; font-size: 10pt; }
   .abstract { font-size: 9.5pt; line-height: 1.27; margin-top: 2pt; text-align: justify; hyphens: auto; }
   .abstract .lbl { font-style: italic; }
 
@@ -109,7 +121,7 @@
   .sched { font-style: italic; color: #444; }
 
   .kv { display: flex; gap: 10pt; margin-bottom: 2.5pt; }
-  .kv .k { flex: 0 0 92pt; font-weight: 600; }
+  .kv .k { flex: 0 0 74pt; font-weight: 600; }
   .kv .v { flex: 1; }
 
   .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin-top: 2pt; }
@@ -126,12 +138,33 @@
 <header>
   <div class="name">Ibrahim Goni Abdoulkadiri</div>
   <div class="subtitle">Ph.D. Candidate in Development Economics</div>
-  <div class="contact">
-    Université Clermont Auvergne, CNRS, IRD, CERDI (Center for Studies and Research on International Development)<br>
-    26 avenue Léon Blum, 63000 Clermont-Ferrand, France<span class="sep">·</span>+33 7 49 93 78 63<br>
-    <a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr</a><span class="sep">·</span><a href="mailto:ibrahimgoni02@gmail.com">ibrahimgoni02@gmail.com</a><span class="sep">·</span><a href="https://ibgoni.github.io/">ibgoni.github.io</a>
+  <div class="contact-grid">
+    <div class="c-left">
+      Université Clermont Auvergne, CNRS, IRD, CERDI<br>
+      <span class="c-sub">Center for Studies and Research on International Development</span><br>
+      26 avenue Léon Blum, 63000 Clermont-Ferrand, France
+    </div>
+    <div class="c-right">
+      +33 7 49 93 78 63<br>
+      <a href="mailto:Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr">Ibrahim_Goni.ABDOULKADIRI@doctorant.uca.fr</a><br>
+      <a href="mailto:ibrahimgoni02@gmail.com">ibrahimgoni02@gmail.com</a><span class="sep">·</span><a href="https://ibgoni.github.io/">ibgoni.github.io</a>
+    </div>
   </div>
 </header>
+
+<h2>References</h2>
+<div class="refs">
+  <div>
+    <span class="rn">Vianney Dequiedt</span><br>
+    CERDI, Université Clermont Auvergne<br>
+    <a href="mailto:Vianney.DEQUIEDT@uca.fr">Vianney.DEQUIEDT@uca.fr</a>
+  </div>
+  <div>
+    <span class="rn">Pierre Biscaye</span><br>
+    CERDI, Université Clermont Auvergne<br>
+    <a href="mailto:Pierre.BISCAYE@uca.fr">Pierre.BISCAYE@uca.fr</a>
+  </div>
+</div>
 
 <h2>Education</h2>
 
@@ -169,15 +202,14 @@
 <h2>Working Papers</h2>
 
 <div class="paper">
-  <div class="row"><div class="l"><span class="paper-title">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</span></div><div class="r">October 2026</div></div>
+  <div class="row"><div class="l"><a class="paper-title" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;dl=0">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</a></div><div class="r">October 2026</div></div>
   <div class="abstract"><span class="lbl">Abstract:</span> Where does fast internet raise local economic activity? I study the 2009–2012 arrival of submarine fibre-optic cables in seventeen sub-Saharan African countries. Using a heterogeneity-robust difference-in-differences estimator, I compare locations within ten kilometres of the pre-existing terrestrial backbone with locations ten to twenty kilometres away in the same country, before and after cable arrival. Gridded GDP rises by 0.7 percent and night lights by 7.3 percent on average. Gains are larger near 3G or 4G towers and smaller farther from roads and the electricity transmission network, suggesting that inland last mile infrastructure helps determine who benefits from greater international bandwidth. To examine what these gains mean for households, I apply the same design to survey data. I also find suggestive evidence of increases in consumption and assets. The clearest change is a five-percentage-point increase in the share of working-age adults in non-agricultural work, with no detectable change in overall employment.</div>
 </div>
 
 <h2>Work in Progress</h2>
 
 <div class="paper">
-  <span class="paper-title">Power Outages and Digital Payments: Evidence from Brazil</span>
-  <div class="meta">Draft in preparation</div>
+  <div class="row"><div class="l"><span class="paper-title">Power Outages and Digital Payments: Evidence from Brazil</span></div><div class="r status">Draft in preparation</div></div>
 </div>
 
 <div class="paper">
@@ -297,23 +329,10 @@
 </div>
 
 <h2>Skills and Languages</h2>
-<div class="kv"><div class="k">Programming</div><div class="v">Stata (advanced), R, Python (web scraping, microdata and geospatial processing), QGIS, SPSS, LaTeX</div></div>
-<div class="kv"><div class="k">Data</div><div class="v">Construction and cleaning of large historical, geospatial, and cross-country datasets; reproducible workflows</div></div>
+<div class="kv"><div class="k">Programming</div><div class="v">Stata (advanced), R, Python (web scraping, geospatial processing), QGIS, SPSS, LaTeX</div></div>
+<div class="kv"><div class="k">Data</div><div class="v">Construction and cleaning of large microdata, geospatial, historical, and cross-country datasets; reproducible workflows</div></div>
 <div class="kv"><div class="k">Languages</div><div class="v">French (native), English (professional), Arabic (basic)</div></div>
 
-<h2>References</h2>
-<div class="refs">
-  <div>
-    <span class="rn">Vianney Dequiedt</span><br>
-    CERDI, Université Clermont Auvergne<br>
-    <a href="mailto:Vianney.DEQUIEDT@uca.fr">Vianney.DEQUIEDT@uca.fr</a>
-  </div>
-  <div>
-    <span class="rn">Pierre Biscaye</span><br>
-    CERDI, Université Clermont Auvergne<br>
-    <a href="mailto:Pierre.BISCAYE@uca.fr">Pierre.BISCAYE@uca.fr</a>
-  </div>
-</div>
 
 
 </body>
