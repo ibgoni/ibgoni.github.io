@@ -120,6 +120,17 @@
   .yr .b div + div { margin-top: 1pt; }
   .sched { font-style: italic; color: #444; }
 
+  /* clickable tags: links to the draft and to the course materials */
+  .pills { float: right; margin-left: 8pt; }
+  .pill {
+    float: right; margin: 1.2pt 0 0 5pt;
+    font-size: 7.4pt; font-weight: 600; font-style: normal;
+    letter-spacing: 0.09em; text-transform: uppercase; line-height: 1;
+    color: var(--accent); border: 0.6pt solid var(--accent); border-radius: 6pt;
+    padding: 1.6pt 5pt 1.2pt;
+  }
+  .pills .pill { float: none; display: inline-block; margin: 1.2pt 0 0 5pt; }
+
   .kv { display: flex; gap: 10pt; margin-bottom: 2.5pt; }
   .kv .k { flex: 0 0 74pt; font-weight: 600; }
   .kv .v { flex: 1; }
@@ -203,7 +214,7 @@
 
 <div class="paper">
   <div class="row"><div class="l"><a class="paper-title" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;dl=0">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</a></div><div class="r">October 2026</div></div>
-  <div class="abstract"><span class="lbl">Abstract:</span> Where does fast internet raise local economic activity? I study the 2009–2012 arrival of submarine fibre-optic cables in seventeen sub-Saharan African countries. Using a heterogeneity-robust difference-in-differences estimator, I compare locations within ten kilometres of the pre-existing terrestrial backbone with locations ten to twenty kilometres away in the same country, before and after cable arrival. Gridded GDP rises by 0.7 percent and night lights by 7.3 percent on average. Gains are larger near 3G or 4G towers and smaller farther from roads and the electricity transmission network, suggesting that inland last mile infrastructure helps determine who benefits from greater international bandwidth. To examine what these gains mean for households, I apply the same design to survey data. I also find suggestive evidence of increases in consumption and assets. The clearest change is a five-percentage-point increase in the share of working-age adults in non-agricultural work, with no detectable change in overall employment.</div>
+  <div class="abstract"><span class="lbl">Abstract:</span> Where does fast internet raise local economic activity? I study the 2009–2012 arrival of submarine fibre-optic cables in seventeen sub-Saharan African countries. Using a heterogeneity-robust difference-in-differences estimator, I compare locations within ten kilometres of the pre-existing terrestrial backbone with locations ten to twenty kilometres away in the same country, before and after cable arrival. Gridded GDP rises by 0.7 percent and night lights by 7.3 percent on average. Gains are larger near 3G or 4G towers and smaller farther from roads and the electricity transmission network, suggesting that inland last mile infrastructure helps determine who benefits from greater international bandwidth. To examine what these gains mean for households, I apply the same design to survey data. I also find suggestive evidence of increases in consumption and assets. The clearest change is a five-percentage-point increase in the share of working-age adults in non-agricultural work, with no detectable change in overall employment.<span class="pills"><a class="pill" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;dl=0">Draft PDF</a><a class="pill" href="https://ibgoni.github.io/research.html#wired-for-growth">Web page</a></span></div>
 </div>
 
 <h2>Work in Progress</h2>
@@ -265,13 +276,13 @@
   <div class="b">Eiffel Excellence Scholarship, French Ministry for Europe and Foreign Affairs</div>
 </div>
 
-<h2>Teaching Experience <span class="h2-note">Materials at ibgoni.github.io/teaching.html</span></h2>
+<h2>Teaching Experience <a class="h2-note" href="https://ibgoni.github.io/teaching.html">Materials at ibgoni.github.io/teaching.html</a></h2>
 
 <div class="entry">
   <div class="row"><div class="l"><span class="org">Impact Evaluation</span>, Université Clermont Auvergne, School of Economics</div><div class="r">2025–present</div></div>
   <div class="row"><div class="l role">Teaching assistant (tutorials), Magistère in Development Economics, 3rd year</div></div>
   <ul class="bul">
-    <li>Designed five tutorials (RCTs, RDD, DiD, matching, IV), each built on a published study replicated in Stata.</li>
+    <li>Designed five tutorials (RCTs, RDD, DiD, matching, IV), each built on a published study replicated in Stata.<a class="pill" href="https://ibgoni.github.io/teaching/impact-evaluation/">Materials</a></li>
   </ul>
 </div>
 
@@ -279,7 +290,7 @@
   <div class="row"><div class="l"><span class="org">Econometrics</span>, Université Clermont Auvergne, School of Economics</div><div class="r">2025–present</div></div>
   <div class="row"><div class="l role">Teaching assistant (tutorials), Magistère, 3rd year (2026–27); M.Sc. in Development Economics, 1st year (2025–26)</div></div>
   <ul class="bul">
-    <li>Five tutorials from the anatomy of OLS to instrumental variables, fixed effects, and dynamic panel GMM.</li>
+    <li>Five tutorials from the anatomy of OLS to instrumental variables, fixed effects, and dynamic panel GMM.<a class="pill" href="https://ibgoni.github.io/teaching/econometrics/">Materials</a></li>
   </ul>
 </div>
 
@@ -287,7 +298,7 @@
   <div class="row"><div class="l"><span class="org">Development Economics Seminar</span>, Université Clermont Auvergne, School of Economics</div><div class="r">2025–2026</div></div>
   <div class="row"><div class="l role">Doctoral tutor, M.Sc. in Development Economics, 2nd year, Economic Analysis track</div></div>
   <ul class="bul">
-    <li>Prepared student presenters and discussants of recent research papers in development economics.</li>
+    <li>Prepared student presenters and discussants of recent research papers in development economics.<a class="pill" href="https://ibgoni.github.io/teaching/development-seminar/">Syllabus</a></li>
   </ul>
 </div>
 
