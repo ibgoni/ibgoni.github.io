@@ -29,10 +29,13 @@ components in `_includes/`.
   automatically.
 - **Presentations**: add an entry to `_data/talks.yml`. It appears on the
   Research page (by year) and, through `paper:`, under the paper presented.
-- **Text or a new paper**: edit `research.html` directly on GitHub
-  (pencil icon). To add a paper, copy an existing
-  `<article class="paper">…</article>` block and edit the text inside the
-  tags.
+- **Papers**: edit `_data/papers.yml` (pencil icon on GitHub). To add a
+  paper, copy an existing block and change the fields; the Research page,
+  its jump links, the Cite panel (reference and BibTeX) and the home-page
+  card (`featured: true`) follow. Sections: `publication`, `working`,
+  `progress`, `other`; empty sections are not shown. A topic filter appears
+  on its own from `filter_from` papers. The introduction text stays in
+  `research.html`.
 - **Light/dark theme**: visitors switch with the button in the header;
   the choice is remembered, otherwise the system setting is used.
 - **Fonts**: Fraunces (titles), Source Serif 4 (text) and Source Sans 3

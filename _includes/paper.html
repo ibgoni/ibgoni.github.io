@@ -1,0 +1,69 @@
+{%- comment -%}
+  One paper from _data/papers.yml. Params: p (the paper), compact (true for
+  the lighter rows used by Work in Progress and Other Projects).
+{%- endcomment -%}
+{%- assign p = include.p -%}
+{%- assign main = p.links | first -%}
+{%- assign ob = "{" -%}{%- assign cb = "}" -%}
+<article class="paper{% if include.compact %} paper-compact{% endif %}" id="{{ p.id }}" data-topics="{{ p.topics | join: ' ' }}">
+  <h3>{% if main %}<a href="{{ main.url | escape }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</h3>
+  {%- if p.coauthors %}
+  <p class="coauthors">with {% for a in p.coauthors %}{% if forloop.last and forloop.length > 1 %}{% if forloop.length > 2 %},{% endif %} and {% elsif forloop.index > 1 %}, {% endif %}{% if a.url %}<a href="{{ a.url | escape }}" target="_blank" rel="noopener">{{ a.name }}</a>{% else %}{{ a.name }}{% endif %}{% if a.affiliation %} ({{ a.affiliation }}){% endif %}{% endfor %}</p>
+  {%- endif %}
+  {%- if p.journal %}
+  <p class="paper-journal"><em>{{ p.journal.name }}</em>{% if p.journal.volume %} {{ p.journal.volume }}{% endif %}{% if p.journal.pages %}: {{ p.journal.pages }}{% endif %}, {{ p.journal.year }}</p>
+  {%- endif %}
+  {%- if p.status or p.date %}
+  <p class="paper-status">{{ p.status }}{% if p.status and p.date %} &middot; {% endif %}{{ p.date }}</p>
+  {%- endif %}
+  {%- if p.talks %}{% include presented-at.html paper=p.talks %}{% endif %}
+  {%- if p.links or p.abstract or p.cite %}
+  <div class="paper-actions">
+    {%- for l in p.links %}
+    <a class="pbtn{% if forloop.first %} pbtn-primary{% endif %}" href="{{ l.url | escape }}" target="_blank" rel="noopener">{% include icon.html name=l.kind %}{{ l.label }}</a>
+    {%- endfor %}
+    {%- if p.abstract %}
+    <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="{{ p.id }}-abstract">{% include icon.html name="chevron" %}Abstract</button>
+    {%- endif %}
+    {%- if p.cite %}
+    <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="{{ p.id }}-cite">{% include icon.html name="quote" %}Cite</button>
+    {%- endif %}
+  </div>
+  {%- endif %}
+  {%- if p.abstract %}
+  <div class="paper-panel" id="{{ p.id }}-abstract"><div class="panel-inner">
+    <div class="abstract-body"><p>{{ p.abstract }}</p></div>
+  </div></div>
+  {%- endif %}
+  {%- if p.cite %}
+  {%- capture authors_plain -%}{{ site.data.teaching.author_cite }}{% for a in p.coauthors %}{% if forloop.last %}, &amp; {% else %}, {% endif %}{{ a.cite_as | default: a.name }}{% endfor %}{%- endcapture -%}
+  {%- capture authors_bib -%}Abdoulkadiri, Ibrahim Goni{% for a in p.coauthors %} and {{ a.bib_name | default: a.name }}{% endfor %}{%- endcapture -%}
+  {%- assign year = p.bib.year | default: p.journal.year -%}
+  <div class="paper-panel" id="{{ p.id }}-cite"><div class="panel-inner">
+    <div class="cite-box">
+      <p class="cite-label">Citation</p>
+      <p class="cite-text" id="{{ p.id }}-ref">{{ authors_plain }} ({{ year }}). {% if p.journal %}{{ p.title }}. <em>{{ p.journal.name }}</em>{% if p.journal.volume %}, {{ p.journal.volume }}{% endif %}{% if p.journal.pages %}, {{ p.journal.pages }}{% endif %}.{% if p.journal.doi %} https://doi.org/{{ p.journal.doi }}{% endif %}{% else %}<em>{{ p.title }}</em>. {{ p.venue }}.{% endif %}</p>
+      <p class="cite-label">BibTeX</p>
+      <pre class="bibtex" id="{{ p.id }}-bib">{% if p.journal %}@article{% else %}@unpublished{% endif %}{{ ob }}{{ p.bib.key }},
+  author  = {{ ob }}{{ authors_bib }}{{ cb }},
+  title   = {{ ob }}{{ p.bib.title | default: p.title }}{{ cb }},
+{%- if p.journal %}
+  journal = {{ ob }}{{ p.journal.name }}{{ cb }},{% if p.journal.volume %}
+  volume  = {{ ob }}{{ p.journal.volume }}{{ cb }},{% endif %}{% if p.journal.pages %}
+  pages   = {{ ob }}{{ p.journal.pages }}{{ cb }},{% endif %}{% if p.journal.doi %}
+  doi     = {{ ob }}{{ p.journal.doi }}{{ cb }},{% endif %}
+{%- else %}
+  note    = {{ ob }}{{ p.bib.note | default: p.venue }}{{ cb }},
+{%- endif %}
+  year    = {{ ob }}{{ year }}{{ cb }},{% if p.bib.month %}
+  month   = {{ p.bib.month }},{% endif %}
+  url     = {{ ob }}{{ '/research.html#' | append: p.id | absolute_url }}{{ cb }}
+{{ cb }}</pre>
+      <div class="cite-actions">
+        <button class="copy-btn" type="button" data-copy="{{ p.id }}-ref">Copy citation</button>
+        <button class="copy-btn" type="button" data-copy="{{ p.id }}-bib">Copy BibTeX</button>
+      </div>
+    </div>
+  </div></div>
+  {%- endif %}
+</article>

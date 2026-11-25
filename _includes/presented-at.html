@@ -1,7 +1,9 @@
-{%- comment -%} "Presentations" line under a paper. Param: paper (id used in _data/talks.yml). {%- endcomment -%}
+{%- comment -%} "Presentations" line under a paper. Param: paper (id used in _data/talks.yml).
+  Shows the four most recent events; the rest are counted and linked to the full list. {%- endcomment -%}
 {%- assign pt = site.data.talks | where: "paper", include.paper -%}
 {%- if pt.size > 0 %}
 <p class="presented"><span class="presented-label">Presentations</span>
-  {%- for t in pt %}<span class="presented-item" data-date="{{ t.date | date: '%Y-%m-%d' }}"{% if t.end %} data-end="{{ t.end | date: '%Y-%m-%d' }}"{% endif %}>{{ t.short | default: t.event }}</span>{% unless forloop.last %}<span class="presented-sep" aria-hidden="true">&middot;</span>{% endunless %}{% endfor %}
+  {%- for t in pt limit: 4 %}<span class="presented-item" data-date="{{ t.date | date: '%Y-%m-%d' }}"{% if t.end %} data-end="{{ t.end | date: '%Y-%m-%d' }}"{% endif %}>{{ t.short | default: t.event }}</span>{% unless forloop.last %}<span class="presented-sep" aria-hidden="true">&middot;</span>{% endunless %}{% endfor %}
+  {%- if pt.size > 4 %}{% assign more = pt.size | minus: 4 %}<span class="presented-sep" aria-hidden="true">&middot;</span><a class="presented-more" href="#presentations">+{{ more }} more</a>{% endif %}
 </p>
 {%- endif %}
