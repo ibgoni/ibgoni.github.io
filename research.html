@@ -4,192 +4,75 @@ nav: research
 title: Research
 description: "Working papers and research in progress by Ibrahim Goni Abdoulkadiri: submarine cables and local development in Africa, power outages and digital payments in Brazil, submarine cable disruptions and online labor markets, and willingness-to-pay elicitation."
 ---
+{%- assign P = site.data.papers -%}
+{%- capture sections -%}publication|Publications|publications,working|Working Papers|working-papers,progress|Work in Progress|work-in-progress,other|Other Ongoing Projects|other-projects{%- endcapture -%}
+{%- assign sections = sections | split: "," -%}
   <div class="page-title">
     <h1>Research</h1>
   </div>
 
   <p class="lede">My research studies how digital infrastructure, technology and markets shape economic opportunities in low- and middle-income countries, with a focus on Sub-Saharan Africa. It combines geospatial and administrative data with quasi-experimental and experimental designs.</p>
 
-  <section>
-    <h2>Working Papers</h2>
+  <nav class="page-toc" aria-label="On this page">
+    {%- for s in sections -%}
+      {%- assign sp = s | split: "|" -%}
+      {%- assign list = P.list | where: "section", sp[0] -%}
+      {%- if list.size > 0 %}
+    <a href="#{{ sp[2] }}">{{ sp[1] }}<span class="toc-count">{{ list.size }}</span></a>
+      {%- endif -%}
+    {%- endfor %}
+    <a href="#presentations">Presentations<span class="toc-count">{{ site.data.talks.size }}</span></a>
+  </nav>
 
-    <article class="paper" id="wired-for-growth">
-      <h3><a href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</a></h3>
-      <p class="paper-status">Draft available &middot; October 2026</p>
-      {% include presented-at.html paper="wired" %}
-      <div class="paper-actions">
-        <a class="pbtn pbtn-primary" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">{% include icon.html name="pdf" %}Draft (PDF)</a>
-        <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="wired-for-growth-abstract">{% include icon.html name="chevron" %}Abstract</button>
-        <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="wired-for-growth-cite">{% include icon.html name="quote" %}Cite</button>
-      </div>
-      <div class="paper-panel" id="wired-for-growth-abstract"><div class="panel-inner">
-        <div class="abstract-body">
-          <p>
-            Where does fast internet raise local economic activity? I study the 2009–2012 arrival of submarine fibre-optic cables in seventeen sub-Saharan African countries. 
-            Using a heterogeneity-robust difference-in-differences estimator, I compare locations
-            within ten kilometres of the pre-existing terrestrial backbone with locations ten to twenty 
-            kilometres away in the same country, before and after cable arrival. Gridded GDP rises by 0.7
-            percent and night lights by 7.3 percent on average. Gains are larger near
-            3G or 4G towers and smaller farther from roads and the electricity
-            transmission network, suggesting that inland last mile infrastructure helps
-            determine who benefits from greater international bandwidth. To examine
-            what these gains mean for households, I apply the same design to survey
-            data. I also find suggestive evidence of increases in consumption and
-            assets. The clearest change is a five-percentage-point increase in the
-            share of working-age adults in non-agricultural work, with no detectable change 
-            in overall employment.
-          </p>
-        </div>
-      </div></div>
-      <div class="paper-panel" id="wired-for-growth-cite"><div class="panel-inner">
-        <div class="cite-box">
-          <p class="cite-label">Citation</p>
-          <p class="cite-text" id="wired-for-growth-ref">Abdoulkadiri, I. G. (2026). <em>Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</em>. Working paper, CERDI, Université Clermont Auvergne.</p>
-          <p class="cite-label">BibTeX</p>
-          <pre class="bibtex" id="wired-for-growth-bib">@unpublished{Abdoulkadiri2026Wired,
-  author = {Abdoulkadiri, Ibrahim Goni},
-  title  = {Wired for Growth? Submarine Cables, Inland Infrastructure,
-            and Local Development in {Africa}},
-  note   = {Working paper, CERDI, Universit{\'e} Clermont Auvergne},
-  year   = {2026},
-  month  = oct,
-  url    = {https://ibgoni.github.io/research.html#wired-for-growth}
-}</pre>
-          <div class="cite-actions">
-            <button class="copy-btn" type="button" data-copy="wired-for-growth-ref">Copy citation</button>
-            <button class="copy-btn" type="button" data-copy="wired-for-growth-bib">Copy BibTeX</button>
-          </div>
-        </div>
-      </div></div>
-    </article>
+  {%- if P.list.size >= P.filter_from %}
+  <div class="topic-filter" role="group" aria-label="Filter papers by topic">
+    <button type="button" class="topic is-active" data-topic="all" aria-pressed="true">All</button>
+    {%- for tp in P.topics %}
+    <button type="button" class="topic" data-topic="{{ tp[0] }}" aria-pressed="false">{{ tp[1] }}</button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- for s in sections -%}
+    {%- assign sp = s | split: "|" -%}
+    {%- assign list = P.list | where: "section", sp[0] -%}
+    {%- if list.size > 0 %}
+  <section id="{{ sp[2] }}" class="paper-section">
+    <h2>{{ sp[1] }}</h2>
+    {%- if sp[0] == "progress" or sp[0] == "other" %}
+    <div class="paper-stack">
+      {%- for pp in list %}
+      {% include paper.html p=pp compact=true %}
+      {%- endfor %}
+    </div>
+    {%- else %}
+      {%- for pp in list %}
+    {% include paper.html p=pp %}
+      {%- endfor %}
+    {%- endif %}
   </section>
+    {%- endif -%}
+  {%- endfor %}
 
-  <section>
-    <h2>Work in Progress</h2>
-
-    <article class="paper" id="power-outages">
-      <h3>Power Outages and Digital Payments: Evidence from Brazil</h3>
-      <p class="paper-status">Draft in preparation</p>
-      <div class="paper-actions">
-        <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="power-outages-abstract">{% include icon.html name="chevron" %}Abstract</button>
-      </div>
-      <div class="paper-panel" id="power-outages-abstract"><div class="panel-inner">
-        <div class="abstract-body">
-          <p>
-            Digital payments depend on electricity, whose supply fails routinely
-            in many low- and middle-income countries. This paper studies how such
-            outages affect payments through Pix, Brazil&rsquo;s instant payment
-            system. Using administrative records of power interruptions and
-            comparing neighboring municipalities from one month to the next, it
-            shows that each unplanned hour without power per consumer keeps a
-            fifth to a third of an average hour&rsquo;s payments out of Pix. These
-            payments are not fully made up through Pix within three months.
-            Interruptions mainly reduce how often individuals pay, and much less
-            the number who do. Poorer municipalities lose the most hours of
-            electricity and the largest share of their payments.
-          </p>
-        </div>
-      </div></div>
-    </article>
-
-    <article class="paper" id="bdm-collusion">
-      <h3>Collusion in Willingness to Pay Elicitation Mechanisms</h3>
-      <p class="coauthors">with Sherry Banyout (ENS de Lyon), Pierre Biscaye (Université Clermont Auvergne), Jules Gazeaud (Université Clermont Auvergne), and Nada Rostom (University of Antwerp)</p>
-      <p class="paper-status">Data analysis in progress</p>
-      <div class="paper-actions">
-        <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="bdm-collusion-abstract">{% include icon.html name="chevron" %}Abstract</button>
-      </div>
-      <div class="paper-panel" id="bdm-collusion-abstract"><div class="panel-inner">
-        <div class="abstract-body">
-          <p>
-            The Becker–DeGroot–Marschak (BDM) mechanism is widely used in
-            experimental and field settings to elicit individuals&rsquo; willingness
-            to pay (WTP) for goods and services. Under standard assumptions,
-            truthful reporting is the dominant strategy, making the mechanism
-            attractive for measuring demand. The BDM mechanism is also
-            increasingly used in selective trials to identify the causal impact
-            of goods or services, where actual purchase is instrumented by the
-            randomly assigned price (Chassang et al., 2012). In the course of
-            implementing a BDM mechanism to allocate job-matching services in a
-            field experiment in Egypt on young farmers&rsquo; adaptation to climate
-            change, we identified a potential concern that has received little
-            attention in the literature: collusion between enumerators and
-            participants. Such collusion could arise for several reasons. For
-            instance, participants who do not win the auction in the BDM may
-            regret bidding too low and request that enumerators increase their
-            reported willingness to pay in order to buy the service. Conversely,
-            participants who are unable to pay for the service after winning the
-            auction may ask enumerators to adjust their reported willingness to
-            pay in order not to buy the service. Enumerators may have incentives
-            to accommodate such requests, for example, to reduce the likelihood
-            of reporting payment failures or disputes to supervisors, or simply
-            to ease interactions with participants. Such collusion can bias
-            estimated willingness to pay and compromise the identification
-            strategy in selective trials. This project investigates the extent
-            and implications of this issue. First, we conduct a systematic
-            review of the studies using a BDM mechanism to document whether and
-            how the possibility of collusion is discussed. Second, we propose a
-            statistical test to detect collusion. Third, we implement the test
-            across all studies using BDM with publicly available data. Fourth,
-            we introduce a BDM protocol that is robust to collusion between
-            enumerators and participants, and implement it in our field
-            experiment in Egypt. Finally, we show how in our field experiment
-            estimates of the impacts of the job-matching services would have
-            differed had we not implemented this robust protocol.
-          </p>
-        </div>
-      </div></div>
-    </article>
-
-    <article class="paper" id="cable-disruptions">
-      <h3>When the Internet&rsquo;s Backbone Breaks: Submarine Cable Disruptions and Worker Access to Global Online Labor Markets</h3>
-      <p class="coauthors">with Joël Cariolle (FERDI)</p>
-      <p class="paper-status">Data analysis in progress</p>
-      <div class="paper-actions">
-        <button class="pbtn" type="button" data-panel aria-expanded="false" aria-controls="cable-disruptions-abstract">{% include icon.html name="chevron" %}Abstract</button>
-      </div>
-      <div class="paper-panel" id="cable-disruptions-abstract"><div class="panel-inner">
-        <div class="abstract-body">
-          <p>
-            Digital trade is often framed as weightless, yet worker-side access
-            to global online labor markets may still depend on fragile
-            cross-border internet infrastructure. I study that dependence by
-            constructing a new audited global database of submarine cable
-            disruptions and merging it to daily worker-country observations from
-            the Online Labour Index. The worker panel covers 214 countries from
-            June 2017 to September 2024 and overlaps with 103 verified or partially verified
-            submarine disruptions in 63 countries. In country-by-day Poisson
-            models with country and day fixed effects, observed worker-side
-            platform participation falls by about 7&nbsp;percent within 14 days of a
-            disruption and by about 11&nbsp;percent over the reported outage or
-            repair window. Effects are much larger for multi-cable events and
-            are concentrated in software, creative, and sales occupations, while
-            buyer-country activity does not decline. I interpret these estimates
-            as reduced-form evidence that the reliability of international
-            connectivity is a binding short-run input into worker access to
-            global digital labor markets.
-          </p>
-        </div>
-      </div></div>
-    </article>
-
-    <article class="paper">
-      <h3>Climate Shocks and Price Dynamics: Does Market Integration Matter?</h3>
-      <p class="coauthors">with Pierre Biscaye (Université Clermont Auvergne)</p>
-      <p class="paper-status">Early-stage project</p>
-    </article>
-  </section>
-
-  <section>
-    <h2>Other Ongoing Projects</h2>
-
-    <article class="paper">
-      <h3>Public Policies to Reduce the Impacts of the Food Sector on Biodiversity</h3>
-      <p class="coauthors">with Céline Bonnet, Zohra Bouamra-Mechemache, Clélia Sirami, and Marine Coinon</p>
-    </article>
-  </section>
-
-  <section>
+  <section id="presentations">
     <h2>Presentations</h2>
     {% include talks.html %}
   </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+  {%- for pp in P.list %}
+    {
+      "@type": "ScholarlyArticle",
+      "headline": {{ pp.title | jsonify }},
+      "url": {{ '/research.html#' | append: pp.id | absolute_url | jsonify }},
+      "author": [{ "@type": "Person", "name": "Ibrahim Goni Abdoulkadiri", "url": {{ '/' | absolute_url | jsonify }} }{% for a in pp.coauthors %}, { "@type": "Person", "name": {{ a.name | jsonify }} }{% endfor %}]
+      {%- if pp.abstract %},
+      "abstract": {{ pp.abstract | jsonify }}{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+  {%- endfor %}
+  ]
+}
+</script>

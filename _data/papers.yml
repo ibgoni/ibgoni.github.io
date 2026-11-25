@@ -1,0 +1,185 @@
+# Papers, in the order they appear in each section of the Research page.
+# Add a paper by copying a block; nothing else needs editing. The home-page
+# card shows the paper marked featured: true.
+#
+#   id          short name, used in links (research.html#id); letters and -
+#   section     publication | working | progress | other
+#   title       full title
+#   coauthors   list of name, affiliation (optional), url (optional)
+#   journal     for publications: journal, year, volume, pages, doi
+#   status      short line under the title ("Draft available", ...)
+#   date        shown after the status ("October 2026")
+#   links       buttons: label, url, kind (pdf, slides, data, code, web);
+#               the first one is the main (filled) button
+#   abstract    text of the Abstract panel (optional)
+#   cite        true: adds the Cite panel (reference + BibTeX)
+#   venue       where the paper stands, for the reference ("Working paper, ...")
+#   bib         BibTeX details: key, year, month, note, title (optional,
+#               to protect capitals with braces)
+#   short       short title, used in the list of presentations (optional)
+#   talks       id used for this paper in _data/talks.yml (optional)
+#   topics      tags used by the topic filter, see topics below
+#   featured    true: shown in the card on the home page
+#   featured_note  sentence under the title in that card
+
+topics:
+  digital: Digital economy
+  agriculture: Agriculture & environment
+  labor: Labor markets
+  methods: Experimental methods
+
+# The topic filter appears on its own once there are at least this many papers.
+filter_from: 8
+
+list:
+- id: wired-for-growth
+  section: working
+  title: "Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa"
+  status: Draft available
+  date: October 2026
+  links:
+    - label: Draft (PDF)
+      kind: pdf
+      url: "https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&st=hk8rqj1h&dl=0"
+  abstract: >-
+    Where does fast internet raise local economic activity? I study the
+    2009–2012 arrival of submarine fibre-optic cables in seventeen
+    sub-Saharan African countries. Using a heterogeneity-robust
+    difference-in-differences estimator, I compare locations within ten
+    kilometres of the pre-existing terrestrial backbone with locations ten
+    to twenty kilometres away in the same country, before and after cable
+    arrival. Gridded GDP rises by 0.7 percent and night lights by 7.3
+    percent on average. Gains are larger near 3G or 4G towers and smaller
+    farther from roads and the electricity transmission network,
+    suggesting that inland last mile infrastructure helps determine who
+    benefits from greater international bandwidth. To examine what these
+    gains mean for households, I apply the same design to survey data. I
+    also find suggestive evidence of increases in consumption and assets.
+    The clearest change is a five-percentage-point increase in the share
+    of working-age adults in non-agricultural work, with no detectable
+    change in overall employment.
+  cite: true
+  venue: "Working paper, CERDI, Université Clermont Auvergne"
+  bib:
+    key: Abdoulkadiri2026Wired
+    year: 2026
+    month: oct
+    note: "Working paper, CERDI, Universit{\\'e} Clermont Auvergne"
+    title: "Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in {Africa}"
+  short: "Wired for Growth?"
+  talks: wired
+  topics: [digital]
+  featured: true
+  featured_note: "Selected for the CSAE Conference 2027 (Oxford) and the Kiel–CEPR–World Bank African Economic Development Conference 2027 (Rome)."
+
+- id: power-outages
+  section: progress
+  title: "Power Outages and Digital Payments: Evidence from Brazil"
+  status: Draft in preparation
+  abstract: >-
+    Digital payments depend on electricity, whose supply fails routinely
+    in many low- and middle-income countries. This paper studies how such
+    outages affect payments through Pix, Brazil’s instant payment system.
+    Using administrative records of power interruptions and comparing
+    neighboring municipalities from one month to the next, it shows that
+    each unplanned hour without power per consumer keeps a fifth to a
+    third of an average hour’s payments out of Pix. These payments are not
+    fully made up through Pix within three months. Interruptions mainly
+    reduce how often individuals pay, and much less the number who do.
+    Poorer municipalities lose the most hours of electricity and the
+    largest share of their payments.
+  topics: [digital]
+
+- id: bdm-collusion
+  section: progress
+  title: "Collusion in Willingness to Pay Elicitation Mechanisms"
+  coauthors:
+    - name: Sherry Banyout
+      affiliation: ENS de Lyon
+    - name: Pierre Biscaye
+      affiliation: Université Clermont Auvergne
+    - name: Jules Gazeaud
+      affiliation: Université Clermont Auvergne
+    - name: Nada Rostom
+      affiliation: University of Antwerp
+  status: Data analysis in progress
+  abstract: >-
+    The Becker–DeGroot–Marschak (BDM) mechanism is widely used in
+    experimental and field settings to elicit individuals’ willingness to
+    pay (WTP) for goods and services. Under standard assumptions, truthful
+    reporting is the dominant strategy, making the mechanism attractive
+    for measuring demand. The BDM mechanism is also increasingly used in
+    selective trials to identify the causal impact of goods or services,
+    where actual purchase is instrumented by the randomly assigned price
+    (Chassang et al., 2012). In the course of implementing a BDM mechanism
+    to allocate job-matching services in a field experiment in Egypt on
+    young farmers’ adaptation to climate change, we identified a potential
+    concern that has received little attention in the literature:
+    collusion between enumerators and participants. Such collusion could
+    arise for several reasons. For instance, participants who do not win
+    the auction in the BDM may regret bidding too low and request that
+    enumerators increase their reported willingness to pay in order to buy
+    the service. Conversely, participants who are unable to pay for the
+    service after winning the auction may ask enumerators to adjust their
+    reported willingness to pay in order not to buy the service.
+    Enumerators may have incentives to accommodate such requests, for
+    example, to reduce the likelihood of reporting payment failures or
+    disputes to supervisors, or simply to ease interactions with
+    participants. Such collusion can bias estimated willingness to pay and
+    compromise the identification strategy in selective trials. This
+    project investigates the extent and implications of this issue. First,
+    we conduct a systematic review of the studies using a BDM mechanism to
+    document whether and how the possibility of collusion is discussed.
+    Second, we propose a statistical test to detect collusion. Third, we
+    implement the test across all studies using BDM with publicly
+    available data. Fourth, we introduce a BDM protocol that is robust to
+    collusion between enumerators and participants, and implement it in
+    our field experiment in Egypt. Finally, we show how in our field
+    experiment estimates of the impacts of the job-matching services would
+    have differed had we not implemented this robust protocol.
+  topics: [methods]
+
+- id: cable-disruptions
+  section: progress
+  title: "When the Internet’s Backbone Breaks: Submarine Cable Disruptions and Worker Access to Global Online Labor Markets"
+  coauthors:
+    - name: Joël Cariolle
+      affiliation: FERDI
+  status: Data analysis in progress
+  abstract: >-
+    Digital trade is often framed as weightless, yet worker-side access to
+    global online labor markets may still depend on fragile cross-border
+    internet infrastructure. I study that dependence by constructing a new
+    audited global database of submarine cable disruptions and merging it
+    to daily worker-country observations from the Online Labour Index. The
+    worker panel covers 214 countries from June 2017 to September 2024 and
+    overlaps with 103 verified or partially verified submarine disruptions
+    in 63 countries. In country-by-day Poisson models with country and day
+    fixed effects, observed worker-side platform participation falls by
+    about 7 percent within 14 days of a disruption and by about 11 percent
+    over the reported outage or repair window. Effects are much larger for
+    multi-cable events and are concentrated in software, creative, and
+    sales occupations, while buyer-country activity does not decline. I
+    interpret these estimates as reduced-form evidence that the
+    reliability of international connectivity is a binding short-run input
+    into worker access to global digital labor markets.
+  topics: [digital, labor]
+
+- id: climate-prices
+  section: progress
+  title: "Climate Shocks and Price Dynamics: Does Market Integration Matter?"
+  coauthors:
+    - name: Pierre Biscaye
+      affiliation: Université Clermont Auvergne
+  status: Early-stage project
+  topics: [agriculture]
+
+- id: food-biodiversity
+  section: other
+  title: "Public Policies to Reduce the Impacts of the Food Sector on Biodiversity"
+  coauthors:
+    - name: Céline Bonnet
+    - name: Zohra Bouamra-Mechemache
+    - name: Clélia Sirami
+    - name: Marine Coinon
+  topics: [agriculture]

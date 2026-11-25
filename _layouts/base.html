@@ -83,6 +83,26 @@
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
 
+    /* Topic filter on the Research page (shown once there are many papers). */
+    var topics = document.querySelectorAll('.topic-filter .topic');
+    topics.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var want = btn.getAttribute('data-topic');
+        topics.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('.paper[data-topics]').forEach(function (a) {
+          var tags = (a.getAttribute('data-topics') || '').split(' ');
+          a.hidden = want !== 'all' && tags.indexOf(want) < 0;
+        });
+        document.querySelectorAll('.paper-section').forEach(function (s) {
+          s.hidden = !s.querySelector('.paper:not([hidden])');
+        });
+      });
+    });
+
     /* Copy-to-clipboard buttons (citations). */
     document.querySelectorAll('[data-copy]').forEach(function (btn) {
       btn.addEventListener('click', function () {

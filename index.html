@@ -70,17 +70,27 @@ jsonld: person-jsonld.html
     </div>
   </div>
 
+  {%- assign fp = site.data.papers.list | where: "featured", true | first -%}
+  {%- if fp %}
+  {%- assign fmain = fp.links | first %}
   <div class="highlight">
-    <p class="kicker">Working paper</p>
+    <p class="kicker">{% case fp.section %}{% when "publication" %}Publication{% when "progress" %}Work in progress{% else %}Working paper{% endcase %}</p>
     <p class="highlight-title">
-      <a href="{{ '/research.html#wired-for-growth' | relative_url }}">Wired for Growth? Submarine Cables, Inland Infrastructure, and Local Development in Africa</a>
+      <a href="{{ '/research.html#' | append: fp.id | relative_url }}">{{ fp.title }}</a>
     </p>
-    <p class="highlight-note">Selected for the CSAE Conference 2027 (Oxford) and the Kiel–CEPR–World Bank African Economic Development Conference 2027 (Rome).</p>
+    {%- if fp.featured_note %}
+    <p class="highlight-note">{{ fp.featured_note }}</p>
+    {%- endif %}
     <div class="paper-actions">
-      <a class="pbtn pbtn-primary" href="https://www.dropbox.com/scl/fi/rnv7swxgvo017bnc5ren5/wired_for_growth_final_v.pdf?rlkey=cfdpk133fr5yhkbbj6zsefsr6&amp;st=hk8rqj1h&amp;dl=0" target="_blank" rel="noopener">{% include icon.html name="pdf" %}Draft (PDF)</a>
-      <a class="pbtn" href="{{ '/research.html#wired-for-growth-abstract' | relative_url }}">{% include icon.html name="arrow" %}Abstract</a>
+      {%- if fmain %}
+      <a class="pbtn pbtn-primary" href="{{ fmain.url | escape }}" target="_blank" rel="noopener">{% include icon.html name=fmain.kind %}{{ fmain.label }}</a>
+      {%- endif %}
+      {%- if fp.abstract %}
+      <a class="pbtn" href="{{ '/research.html#' | append: fp.id | append: '-abstract' | relative_url }}">{% include icon.html name="arrow" %}Abstract</a>
+      {%- endif %}
     </div>
   </div>
+  {%- endif %}
 
   <section class="news" aria-labelledby="news-heading">
     <h2 id="news-heading">News</h2>
