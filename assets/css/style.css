@@ -5,17 +5,32 @@
    crafted enough to stand out.
    ========================================================================== */
 
+/* Fonts: self-hosted variable fonts (SIL Open Font License, see assets/fonts/).
+   Each family is split into Latin and Latin Extended files; browsers fetch
+   only what a page uses. */
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../fonts/fraunces-latin-opsz-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../fonts/fraunces-latin-ext-opsz-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("../fonts/source-serif-4-latin-opsz-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Source Serif 4"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("../fonts/source-serif-4-latin-ext-opsz-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 200 900; font-display: swap; src: url("../fonts/source-serif-4-latin-opsz-italic.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Source Serif 4"; font-style: italic; font-weight: 200 900; font-display: swap; src: url("../fonts/source-serif-4-latin-ext-opsz-italic.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3-latin-ext-wght-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Source Sans 3"; font-style: italic; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3-latin-wght-italic.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Source Sans 3"; font-style: italic; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3-latin-ext-wght-italic.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
 :root {
   --paper: #f2f5fa;
   --card: #ffffff;
   --ink: #191c20;
   --muted: #565e68;
-  --faint: #6b737d;
+  --faint: #626a74;
   --navy: #003262;
   --navy-bright: #0d5aa3;
   --navy-deep: #04264d;
   --gold: #b8862c;
   --gold-soft: #d9b45f;
+  --gold-text: #8a6419;        /* gold for small text: 4.6:1 or more on every light ground */
   --rule: #dbe3ee;
   --wash: #e9eef6;
   --display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -49,6 +64,13 @@ body::before {
 }
 
 ::selection { background: var(--navy); color: #fff; }
+
+/* Typographic polish: balanced headings, no orphan words in paragraphs,
+   aligned figures in dates and times. */
+h1, h2, h3, .highlight-title, .guiding-q, .pager-title, .cc-summary { text-wrap: balance; }
+p, li, dd, .abstract-body { text-wrap: pretty; }
+.news-date, .plan-time, .dated-list .year, .talk-year-label, .session-num, .byline { font-variant-numeric: tabular-nums; }
+.site-footer, .pbtn-primary, .package { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 /* ------------------------------------------------------------------ header */
 
@@ -313,9 +335,12 @@ summary:focus-visible,
 }
 
 .facts li small {
+  display: block;
   font-family: var(--sans);
   font-size: 0.7813rem;
+  line-height: 1.5;
   color: var(--faint);
+  margin-top: 0.1rem;
 }
 
 /* offset panel behind the portrait */
@@ -356,7 +381,7 @@ summary:focus-visible,
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 0.9rem;
 }
 
@@ -451,7 +476,7 @@ summary:focus-visible,
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 0.3rem;
 }
 
@@ -564,6 +589,8 @@ summary:focus-visible,
 
 .pbtn-primary { background: var(--navy); border-color: var(--navy); color: #fff; }
 .pbtn-primary:hover { background: var(--navy-deep); border-color: var(--navy-deep); }
+
+.session-actions { margin: -0.6rem 0 2rem; }
 
 /* Panels are open when JavaScript is off; with it, closed until asked. */
 .paper-panel {
@@ -696,7 +723,7 @@ html:not(.js) [data-panel] { display: none; }
   padding-top: 0.28rem;
 }
 
-.is-upcoming .news-date { color: var(--gold); }
+.is-upcoming .news-date { color: var(--gold-text); }
 
 .news-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin: 0 0 0.1rem; }
 
@@ -713,7 +740,7 @@ html:not(.js) [data-panel] { display: none; }
 }
 
 .news-kind::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.kind-conference { color: var(--gold); }
+.kind-conference { color: var(--gold-text); }
 .kind-seminar { color: var(--navy-bright); }
 .kind-paper { color: #2e7d5b; }
 .kind-teaching { color: #7a4fa0; }
@@ -721,12 +748,12 @@ html:not(.js) [data-panel] { display: none; }
 .news-upcoming {
   display: none;
   font-family: var(--sans);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
-  background: var(--gold);
+  background: var(--gold-text);
   border-radius: 999px;
   padding: 0.08rem 0.5rem;
   line-height: 1.5;
@@ -808,7 +835,7 @@ html:not(.js) [data-panel] { display: none; }
 }
 
 .presented-sep { margin: 0 0.45rem; color: var(--faint); }
-.presented-item.is-upcoming::after { content: " (upcoming)"; color: var(--gold); font-weight: 600; }
+.presented-item.is-upcoming::after { content: " (upcoming)"; color: var(--gold-text); font-weight: 600; }
 
 /* --------------------------------------------------------------- teaching */
 
@@ -820,7 +847,7 @@ html:not(.js) [data-panel] { display: none; }
 }
 
 .crumbs a { color: var(--muted); }
-.crumbs .sep { margin: 0 0.5rem; color: var(--rule); }
+.crumbs .sep { margin: 0 0.5rem; color: #a3acb8; }
 .crumbs [aria-current] { color: var(--ink); }
 
 .title-local {
@@ -910,7 +937,7 @@ html:not(.js) [data-panel] { display: none; }
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 0.35rem;
 }
 
@@ -1032,7 +1059,7 @@ html:not(.js) [data-panel] { display: none; }
   align-self: center;
   font-family: var(--sans);
   font-size: 1.25rem;
-  color: var(--gold);
+  color: var(--gold-text);
   transition: transform 0.18s ease;
 }
 
@@ -1055,7 +1082,7 @@ html:not(.js) [data-panel] { display: none; }
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 0.25rem;
 }
 
@@ -1204,7 +1231,7 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   font-family: var(--sans);
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--gold-text);
   min-width: 1.4rem;
 }
 
@@ -1448,7 +1475,7 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .pager-title { font-family: var(--display); font-size: 1rem; font-weight: 600; line-height: 1.35; }
@@ -1499,8 +1526,8 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   margin-bottom: 0.6rem;
 }
 
-.foot-col ul { list-style: none; }
-.foot-col li { margin-bottom: 0.3rem; }
+.foot-col ul { list-style: none; line-height: 1.45; }
+.foot-col li { font-size: 0.875rem; margin-bottom: 0.55rem; }
 
 .foot-col a {
   font-family: var(--sans);
@@ -1578,6 +1605,9 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   .news-date { padding-top: 0; }
   .talk-year { grid-template-columns: 1fr; gap: 0.4rem; }
 
+  .site-header { transition: transform 0.25s ease; }
+  .site-header.is-hidden { transform: translateY(-100%); }
+  .site-header.is-hidden:focus-within { transform: none; }
   .site-header .inner { padding: 1.1rem 1.25rem; }
   .site-name { order: 1; }
   .theme-toggle { order: 2; margin-left: auto; }
@@ -1628,6 +1658,7 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
   --navy-deep: #0b1523;
   --gold: #d3a54b;
   --gold-soft: #b8862c;
+  --gold-text: #d3a54b;
   --rule: #2a3342;
   --wash: #1e2530;
 }
@@ -1643,6 +1674,9 @@ a.app-ref:hover { color: var(--navy); text-decoration: underline; text-decoratio
 [data-theme="dark"] .cc-summary { color: #c4cbd5; }
 [data-theme="dark"] .paper-panel .abstract-body { color: #c4cbd5; }
 [data-theme="dark"] .pbtn { border-color: #3c4c61; }
+[data-theme="dark"] .skip-link, [data-theme="dark"] .skip-link:focus { color: #0e1319; }
+[data-theme="dark"] .crumbs .sep { color: #566275; }
+[data-theme="dark"] body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 [data-theme="dark"] .pbtn:hover,
 [data-theme="dark"] .pbtn-primary { background: var(--navy); border-color: var(--navy); color: #0e1319; }
 [data-theme="dark"] .pbtn-primary:hover { background: var(--navy-bright); border-color: var(--navy-bright); }
